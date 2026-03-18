@@ -141,9 +141,4 @@ Detailed view of selected transaction.
 
 - Trigger API call (optional, based on backend)
 - Show success state
-<<<<<<< HEAD
 - Close modal option..
-=======
-- Close modal option>
-
->>>>>>> refs/remotes/origin/abhinav-dev
