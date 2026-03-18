@@ -1,36 +1,144 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Product Requirement Document (PRD)
 
-## Getting Started
+## Product Name: OISTER TRANSACTIONS
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 1. Objective
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Build a B2B transaction discovery platform where only authorized Relationship Managers (RMs) can:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- View available transactions
+- Explore detailed transaction information
+- Express interest in a transaction
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The platform should provide a seamless, CMS-driven, scalable experience.
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 2. Target Users
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Primary Users:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Relationship Managers (RMs)
 
-## Deploy on Vercel
+### Access Control:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Restricted (Login required)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 3. Authentication & Access Control
+
+### Requirements:
+
+- Only authenticated users (RMs) can access the platform
+- Unauthorized users should be redirected to login
+
+### Flow:
+
+1. RM lands on Login Page
+2. Enters credentials
+3. On success → Redirect to Transaction Listing page
+
+---
+
+## 4. User Journey
+
+### Step 1: Login
+
+- User logs into the platform
+
+### Step 2: Transaction Listing (Entry Point)
+
+- Displays all available transactions in card format
+
+### Step 3: Transaction Details Page
+
+- Clicking a card opens detailed view
+
+### Step 4: Show Interest
+
+- CTA button → opens modal → success confirmation
+
+---
+
+## 5. Features & Functional Requirements
+
+---
+
+### 5.1 Transaction Listing Page
+
+#### Description:
+
+Entry point after login showing all transactions.
+
+#### UI:
+
+- Card-based layout
+- Responsive grid
+
+#### Each Card Should Include:
+
+- Transaction Name
+- Minimum ticket size
+- Key highlights (optional)
+- CTA: **“View Details”** (clickable card)
+
+#### Functional Requirements:
+
+- Fetch data from backend / CMS
+- Pagination / Infinite scroll (optional)
+- Loading & empty states
+
+---
+
+### 5.2 Transaction Details Page
+
+#### Description:
+
+Detailed view of selected transaction.
+
+#### Data Source:
+
+- Fully CMS-driven
+
+#### Sections:
+
+- Overview / About
+- Key Details
+- Investment Information
+- Linked Documents (e.g., Deck)
+- Videos (if available)
+
+#### Functional Requirements:
+
+- Dynamic rendering of sections from CMS
+- Support for:
+  - Rich text
+  - Files (PDFs, docs)
+  - Media (videos)
+
+---
+
+### 5.3 CTA: “Show Interest”
+
+#### Placement:
+
+- Prominent button on Details Page
+
+#### Behavior:
+
+1. User clicks CTA
+2. Modal opens
+3. User sees confirmation
+
+#### Modal Content:
+
+> “We have received your interest. Our team will reach out shortly.”
+
+#### Functional Requirements:
+
+- Trigger API call (optional, based on backend)
+- Show success state
+- Close modal option..
