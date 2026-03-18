@@ -141,4 +141,4 @@ Detailed view of selected transaction.
 
 - Trigger API call (optional, based on backend)
 - Show success state
-- Close modal option
+- Close modal option..
