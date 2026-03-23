@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export type OTPInputProps = {
   otp: string[];
@@ -12,7 +12,8 @@ function sanitizeToDigit(input: string) {
   return input.replace(/\D/g, "").slice(0, 1);
 }
 
-export default function OTPInput({ otp, setOtp }: OTPInputProps) {
+export default function OTPInput() {
+  const [otp, setOtp] = useState<string[]>(Array.from({ length: 6 }, () => ""));
   const length = otp.length;
   const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
   const ids = otp.map((_, i) => `otp-digit-${i}`);
@@ -46,7 +47,6 @@ export default function OTPInput({ otp, setOtp }: OTPInputProps) {
     if (e.key === "Backspace") {
       // If current box is empty, jump back and clear previous.
       if (otp[index] === "" && index > 0) {
-        e.preventDefault();
         const prev = index - 1;
         const updated = [...otp];
         updated[prev] = "";
@@ -57,13 +57,11 @@ export default function OTPInput({ otp, setOtp }: OTPInputProps) {
     }
 
     if (e.key === "ArrowLeft") {
-      e.preventDefault();
       focusIndex(index - 1);
       return;
     }
 
     if (e.key === "ArrowRight") {
-      e.preventDefault();
       focusIndex(index + 1);
       return;
     }

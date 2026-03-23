@@ -1,6 +1,16 @@
-const PrimaryButton = ({ text }: { text: string }) => {
+const PrimaryButton = ({
+  text,
+  onClick,
+}: {
+  text: string;
+  onClick: () => void;
+}) => {
   return (
-    <button className="hover:bg-[#1e4be0] active:ring-1 active:ring-white rounded-lg h-10 font-medium text-base text-white cursor-pointer bg-[#516dc9] transition-all duration-500">
+    <button
+      type="button"
+      onClick={onClick}
+      className="h-10 cursor-pointer rounded-lg bg-[#516dc9] text-base font-medium text-white transition-all duration-500 hover:bg-[#1e4be0] active:ring-1 active:ring-white"
+    >
       {text}
     </button>
   );
