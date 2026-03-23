@@ -1,5 +1,5 @@
 import Image from "next/image";
-import PrimaryButton from "./components/PrimaryButton";
+import LoginAuthPanel from "./components/LoginAuthPanel";
 
 const column = "flex-1 bg-[#28283d]";
 
@@ -8,7 +8,7 @@ export default function Home() {
     <div className="flex min-h-screen flex-col gap-px">
       <header className="flex h-20 gap-px">
         <div className={column}>
-          <div className="flex px-10 items-center h-full">
+          <div className="flex h-full items-center px-10">
             <Image
               src="https://unlistedintel.com/wp-content/themes/unlistedintel/assets/images/unlisted-logo-white.svg"
               alt="unlistedIntelLogo"
@@ -21,9 +21,9 @@ export default function Home() {
       </header>
       <main className="flex flex-1 gap-px">
         <div className={column}>
-          <div className="grid justify-center items-center h-full">
+          <div className="grid h-full items-center justify-center">
             <div
-              className="text-6xl text-white font-light px-10"
+              className="px-10 text-6xl font-light text-white"
               style={{ fontFamily: "RecifeDisplay" }}
             >
               ACE WITH SECONDARIES
@@ -31,17 +31,8 @@ export default function Home() {
           </div>
         </div>
         <div className={column}>
-          <div className="grid justify-center items-center h-full">
-            <div className="flex flex-col gap-4 w-[300px]">
-              <input
-                type="text"
-                id="email"
-                placeholder="Enter your Email Address"
-                className="text-black placeholder:text-gray-400 bg-white px-4 py-3 border border-white rounded-lg"
-                required
-              />
-              <PrimaryButton text="Continue" />
-            </div>
+          <div className="grid h-full items-center justify-center">
+            <LoginAuthPanel />
           </div>
         </div>
       </main>
