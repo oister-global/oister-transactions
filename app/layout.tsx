@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import StoreProvider from "./store/StoreProvider";
 
 import "./globals.css";
+import Header from "./components/Header";
 
 export const metadata: Metadata = {
   title: "oister-transactions",
@@ -14,8 +16,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <div className="flex min-h-screen flex-col gap-px">
+          <StoreProvider>
+            <Header />
+            {children}
+          </StoreProvider>
+        </div>
+      </body>
     </html>
   );
 }
-
