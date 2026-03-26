@@ -19,8 +19,10 @@ export default function RootLayout({
       <body>
         <div className="flex min-h-screen flex-col gap-px">
           <StoreProvider>
-            <Header />
-            {children}
+            <div className="fixed w-full top-0 z-10">
+              <Header />
+            </div>
+            <div className="pt-20 m-3">{children}</div>
           </StoreProvider>
         </div>
       </body>
