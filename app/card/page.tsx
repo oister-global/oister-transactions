@@ -1,140 +1,69 @@
+import type { ReactElement } from "react";
 import TransactionCard from "../components/TransactionCard";
 
-const cardData = [
-  {
-    name: "Oister Global Scheme III (Ace Fund - II)",
-    description:
-      "Focused on growth to late stage equity investments in high growth companies who are market leaders or emerging market leaders.",
-    status: "Active",
-    type: "Secondaries",
-    lifetime: { label: "Lifetime", value: "5 (+1+1) yrs from First Close" },
-    drawdown: { label: "Drawdown%", value: "100%" },
-    hurdle: { label: "Hurdle%", value: "12.50%" },
-    fundSize: {
-      label: "Fund Size",
-      value: "INR 200 Cr (+ INR 200 Cr green shoe option)",
-    },
-  },
-  {
-    name: "Oister Global Scheme III (Ace Fund - II)",
-    description:
-      "Focused on growth to late stage equity investments in high growth companies who are market leaders or emerging market leaders.",
-    status: "Active",
-    type: "Secondaries",
-    lifetime: { label: "Lifetime", value: "5 (+1+1) yrs from First Close" },
-    drawdown: { label: "Drawdown%", value: "100%" },
-    hurdle: { label: "Hurdle%", value: "12.50%" },
-    fundSize: {
-      label: "Fund Size",
-      value: "INR 200 Cr (+ INR 200 Cr green shoe option)",
-    },
-  },
-  {
-    name: "Oister Global Scheme III (Ace Fund - II)",
-    description:
-      "Focused on growth to late stage equity investments in high growth companies who are market leaders or emerging market leaders.",
-    status: "Active",
-    type: "Secondaries",
-    lifetime: { label: "Lifetime", value: "5 (+1+1) yrs from First Close" },
-    drawdown: { label: "Drawdown%", value: "100%" },
-    hurdle: { label: "Hurdle%", value: "12.50%" },
-    fundSize: {
-      label: "Fund Size",
-      value: "INR 200 Cr (+ INR 200 Cr green shoe option)",
-    },
-  },
-  {
-    name: "Oister Global Scheme III (Ace Fund - II)",
-    description:
-      "Focused on growth to late stage equity investments in high growth companies who are market leaders or emerging market leaders.",
-    status: "Active",
-    type: "Secondaries",
-    lifetime: { label: "Lifetime", value: "5 (+1+1) yrs from First Close" },
-    drawdown: { label: "Drawdown%", value: "100%" },
-    hurdle: { label: "Hurdle%", value: "12.50%" },
-    fundSize: {
-      label: "Fund Size",
-      value: "INR 200 Cr (+ INR 200 Cr green shoe option)",
-    },
-  },
-  {
-    name: "Oister Global Scheme III (Ace Fund - II)",
-    description:
-      "Focused on growth to late stage equity investments in high growth companies who are market leaders or emerging market leaders.",
-    status: "Active",
-    type: "Secondaries",
-    lifetime: { label: "Lifetime", value: "5 (+1+1) yrs from First Close" },
-    drawdown: { label: "Drawdown%", value: "100%" },
-    hurdle: { label: "Hurdle%", value: "12.50%" },
-    fundSize: {
-      label: "Fund Size",
-      value: "INR 200 Cr (+ INR 200 Cr green shoe option)",
-    },
-  },
-  {
-    name: "Oister Global Scheme III (Ace Fund - II)",
-    description:
-      "Focused on growth to late stage equity investments in high growth companies who are market leaders or emerging market leaders.",
-    status: "Active",
-    type: "Secondaries",
-    lifetime: { label: "Lifetime", value: "5 (+1+1) yrs from First Close" },
-    drawdown: { label: "Drawdown%", value: "100%" },
-    hurdle: { label: "Hurdle%", value: "12.50%" },
-    fundSize: {
-      label: "Fund Size",
-      value: "INR 200 Cr (+ INR 200 Cr green shoe option)",
-    },
-  },
-  {
-    name: "Oister Global Scheme III (Ace Fund - II)",
-    description:
-      "Focused on growth to late stage equity investments in high growth companies who are market leaders or emerging market leaders.",
-    status: "Active",
-    type: "Secondaries",
-    lifetime: { label: "Lifetime", value: "5 (+1+1) yrs from First Close" },
-    drawdown: { label: "Drawdown%", value: "100%" },
-    hurdle: { label: "Hurdle%", value: "12.50%" },
-    fundSize: {
-      label: "Fund Size",
-      value: "INR 200 Cr (+ INR 200 Cr green shoe option)",
-    },
-  },
-  {
-    name: "Oister Global Scheme III (Ace Fund - II)",
-    description:
-      "Focused on growth to late stage equity investments in high growth companies who are market leaders or emerging market leaders.",
-    status: "Active",
-    type: "Secondaries",
-    lifetime: { label: "Lifetime", value: "5 (+1+1) yrs from First Close" },
-    drawdown: { label: "Drawdown%", value: "100%" },
-    hurdle: { label: "Hurdle%", value: "12.50%" },
-    fundSize: {
-      label: "Fund Size",
-      value: "INR 200 Cr (+ INR 200 Cr green shoe option)",
-    },
-  },
-  {
-    name: "Oister Global Scheme III (Ace Fund - II)",
-    description:
-      "Focused on growth to late stage equity investments in high growth companies who are market leaders or emerging market leaders.",
-    status: "Active",
-    type: "Secondaries",
-    lifetime: { label: "Lifetime", value: "5 (+1+1) yrs from First Close" },
-    drawdown: { label: "Drawdown%", value: "100%" },
-    hurdle: { label: "Hurdle%", value: "12.50%" },
-    fundSize: {
-      label: "Fund Size",
-      value: "INR 200 Cr (+ INR 200 Cr green shoe option)",
-    },
-  },
-];
-
-export default function Card() {
+export default function Page(): ReactElement {
   return (
-    <div className="grid grid-cols-2 gap-2">
-      {cardData?.map((props, index) => {
-        return <TransactionCard key={index} {...props} />;
-      })}
+    <div className="grid grid-cols-2 gap-4">
+      <TransactionCard
+        name="Agnikul Cosmos"
+        description="Agnikul Cosmos is a space-tech company that is developing a space-based internet infrastructure. It is one of India's most promising growth stage Space-tech companies."
+        status="Active"
+        type="Growth"
+        lifetime={{ label: "Lifetime", value: "10 years" }}
+        drawdown={{ label: "Drawdown", value: "10%" }}
+        hurdle={{ label: "Hurdle", value: "10%" }}
+        fundSize={{ label: "Fund Size", value: "100000000" }}
+      />
+      <TransactionCard
+        name="Agnikul Cosmos"
+        description="Agnikul Cosmos is a space-tech company that is developing a space-based internet infrastructure. It is one of India's most promising growth stage Space-tech companies."
+        status="Active"
+        type="Growth"
+        lifetime={{ label: "Lifetime", value: "10 years" }}
+        drawdown={{ label: "Drawdown", value: "10%" }}
+        hurdle={{ label: "Hurdle", value: "10%" }}
+        fundSize={{ label: "Fund Size", value: "100000000" }}
+      />
+      <TransactionCard
+        name="Agnikul Cosmos"
+        description="Agnikul Cosmos is a space-tech company that is developing a space-based internet infrastructure. It is one of India's most promising growth stage Space-tech companies."
+        status="Active"
+        type="Growth"
+        lifetime={{ label: "Lifetime", value: "10 years" }}
+        drawdown={{ label: "Drawdown", value: "10%" }}
+        hurdle={{ label: "Hurdle", value: "10%" }}
+        fundSize={{ label: "Fund Size", value: "100000000" }}
+      />
+      <TransactionCard
+        name="Agnikul Cosmos"
+        description="Agnikul Cosmos is a space-tech company that is developing a space-based internet infrastructure. It is one of India's most promising growth stage Space-tech companies."
+        status="Active"
+        type="Growth"
+        lifetime={{ label: "Lifetime", value: "10 years" }}
+        drawdown={{ label: "Drawdown", value: "10%" }}
+        hurdle={{ label: "Hurdle", value: "10%" }}
+        fundSize={{ label: "Fund Size", value: "100000000" }}
+      />
+      <TransactionCard
+        name="Agnikul Cosmos"
+        description="Agnikul Cosmos is a space-tech company that is developing a space-based internet infrastructure. It is one of India's most promising growth stage Space-tech companies."
+        status="Active"
+        type="Growth"
+        lifetime={{ label: "Lifetime", value: "10 years" }}
+        drawdown={{ label: "Drawdown", value: "10%" }}
+        hurdle={{ label: "Hurdle", value: "10%" }}
+        fundSize={{ label: "Fund Size", value: "100000000" }}
+      />
+      <TransactionCard
+        name="Agnikul Cosmos"
+        description="Agnikul Cosmos is a space-tech company that is developing a space-based internet infrastructure. It is one of India's most promising growth stage Space-tech companies."
+        status="Active"
+        type="Growth"
+        lifetime={{ label: "Lifetime", value: "10 years" }}
+        drawdown={{ label: "Drawdown", value: "10%" }}
+        hurdle={{ label: "Hurdle", value: "10%" }}
+        fundSize={{ label: "Fund Size", value: "100000000" }}
+      />
     </div>
   );
 }

@@ -1,30 +1,37 @@
-import type { Metadata } from "next";
-import StoreProvider from "./store/StoreProvider";
-
 import "./globals.css";
+import type { Metadata } from "next";
+import { Work_Sans } from "next/font/google";
+import StoreProvider from "./store/StoreProvider";
 import Header from "./components/Header";
+import MainLayout from "./components/MainLayout";
+
+const workSans = Work_Sans({
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
-  title: "oister-transactions",
-  description: "Next.js app",
+  title: "Oister Transactions",
+  description:
+    "This is a B2B transaction discovery platform for Relationship Managers.",
 };
 
-export default function RootLayout({
+export default function Layout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
     <html lang="en">
-      <body>
-        <div className="flex min-h-screen flex-col gap-px">
-          <StoreProvider>
-            <div className="fixed w-full top-0 z-10">
+      <body className={workSans.className}>
+        <StoreProvider>
+          <div className="flex min-h-screen flex-col">
+            <div className="fixed left-0 z-50 w-full">
               <Header />
             </div>
-            <div className="pt-20 m-3">{children}</div>
-          </StoreProvider>
-        </div>
+            <MainLayout>{children}</MainLayout>
+          </div>
+        </StoreProvider>
       </body>
     </html>
   );

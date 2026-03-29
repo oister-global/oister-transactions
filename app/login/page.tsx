@@ -1,12 +1,10 @@
 import LoginAuthPanel from "./components/LoginAuthPanel";
 
-const column = "flex-1 bg-[#28283d]";
-
-export default function Home() {
+export default function Page() {
   return (
-    <main className="flex flex-1 gap-px">
-      <div className={column}>
-        <div className="grid h-full items-center justify-center">
+    <main className="flex flex-1 gap-px mt-[1px]">
+      <div className="flex flex-1 flex-col bg-[#28283d]">
+        <div className="grid flex-1 place-items-center px-10">
           <div
             className="px-10 text-6xl font-light text-white"
             style={{ fontFamily: "RecifeDisplay" }}
@@ -15,8 +13,8 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className={column}>
-        <div className="grid h-full items-center justify-center">
+      <div className="flex flex-1 flex-col bg-[#28283d]">
+        <div className="grid flex-1 place-items-center px-2">
           <LoginAuthPanel />
         </div>
       </div>

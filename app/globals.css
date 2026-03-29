@@ -8,3 +8,7 @@ body {
 body {
   margin: 0;
 }
+
+.card-wrapper {
+  @apply rounded-xl border border-[#e8eaef] bg-[#fcfcfd] shadow-[0_1px_2px_rgba(0,0,0,0.04)] transition-all duration-200 hover:-translate-y-px hover:border-[#dce0e8] hover:bg-white hover:shadow-[0_6px_20px_rgba(0,0,0,0.05)] p-6;
+}
