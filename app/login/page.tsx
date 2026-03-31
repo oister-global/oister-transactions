@@ -2,7 +2,7 @@ import LoginAuthPanel from "./components/LoginAuthPanel";
 
 export default function Page() {
   return (
-    <main className="flex flex-1 gap-px mt-[1px]">
+    <main className="flex flex-1 gap-px my-[1px]">
       <div className="flex flex-1 flex-col bg-[#28283d]">
         <div className="grid flex-1 place-items-center px-10">
           <div

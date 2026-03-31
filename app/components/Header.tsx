@@ -13,7 +13,7 @@ export default function Header() {
           />
         </div>
       </div>
-      <div className="flex-1 bg-[#28283d]" />
+      <div className="flex-1 bg-[#28283d]"></div>
     </header>
   );
 }

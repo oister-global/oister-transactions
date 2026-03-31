@@ -4,6 +4,7 @@ import { Work_Sans } from "next/font/google";
 import StoreProvider from "./store/StoreProvider";
 import Header from "./components/Header";
 import MainLayout from "./components/MainLayout";
+import Footer from "./components/Footer";
 
 const workSans = Work_Sans({
   subsets: ["latin"],
@@ -31,6 +32,7 @@ export default function Layout({
             </div>
             <MainLayout>{children}</MainLayout>
           </div>
+          <Footer />
         </StoreProvider>
       </body>
     </html>
