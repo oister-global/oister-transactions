@@ -3,9 +3,6 @@
 const SecondaryButton = ({
   text,
   onClick,
-}: {
-  text: string;
-  onClick: () => void;
 }) => {
   return (
     <button

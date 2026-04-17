@@ -4,20 +4,13 @@ import { useEffect } from "react";
 import { SuccessIcon } from "@/public/svg";
 import PrimaryButton from "./PrimaryButton";
 
-type ModalProps = {
-  title?: string;
-  description?: string;
-  buttonText?: string;
-  show: boolean;
-  setShowModal: (show: boolean) => void;
-};
-
 export default function Modal({
   title = "",
   description = "",
+  buttonText = "Go back to Dashboard",
   show = false,
   setShowModal,
-}: ModalProps) {
+}) {
   useEffect(() => {
     if (!show) return;
     const prev = document.body.style.overflow;
@@ -43,7 +36,7 @@ export default function Modal({
           {description}
         </p>
         <PrimaryButton
-          text="Go back to Dashboard"
+          text={buttonText}
           onClick={() => setShowModal(false)}
         />
       </div>

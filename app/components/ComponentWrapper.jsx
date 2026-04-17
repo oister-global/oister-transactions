@@ -1,11 +1,7 @@
 export default function ComponentWrapper({
   heading = "",
   subHeading = "",
-  children,
-}: {
-  heading?: string;
-  subHeading?: string;
-  children?: React.ReactNode;
+  children = null,
 }) {
   return (
     <section className="card-wrapper">

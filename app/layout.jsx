@@ -1,27 +1,23 @@
 import "./globals.css";
-import type { Metadata } from "next";
 import { Work_Sans } from "next/font/google";
 import StoreProvider from "./store/StoreProvider";
 import Header from "./components/Header";
 import MainLayout from "./components/MainLayout";
 import Footer from "./components/Footer";
+import { Toaster } from "react-hot-toast";
 
 const workSans = Work_Sans({
   subsets: ["latin"],
   display: "swap",
 });
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "Oister Transactions",
   description:
     "This is a B2B transaction discovery platform for Relationship Managers.",
 };
 
-export default function Layout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function Layout({ children }) {
   return (
     <html lang="en">
       <body className={workSans.className}>
@@ -34,6 +30,7 @@ export default function Layout({
           </div>
           <Footer />
         </StoreProvider>
+        <Toaster position="top-center" />
       </body>
     </html>
   );

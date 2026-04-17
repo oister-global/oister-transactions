@@ -2,20 +2,14 @@
 
 import { useEffect, useRef, useState } from "react";
 
-export type OTPInputProps = {
-  otp: string[];
-  setOtp: (otp: string[]) => void;
-};
-
-function sanitizeToDigit(input: string) {
+function sanitizeToDigit(input) {
   // Keep only digits; if user pastes multiple characters, take the first digit.
   return input.replace(/\D/g, "").slice(0, 1);
 }
 
-export default function OTPInput() {
-  const [otp, setOtp] = useState<string[]>(Array.from({ length: 6 }, () => ""));
+export default function OTPInput({ otp, setOtp }) {
   const length = otp.length;
-  const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
+  const inputRefs = useRef([]);
   const ids = otp.map((_, i) => `otp-digit-${i}`);
 
   useEffect(() => {
@@ -23,12 +17,12 @@ export default function OTPInput() {
     inputRefs.current[0]?.focus();
   }, []);
 
-  function focusIndex(i: number) {
+  function focusIndex(i) {
     if (i < 0 || i >= length) return;
     inputRefs.current[i]?.focus();
   }
 
-  function handleChange(e: React.ChangeEvent<HTMLInputElement>, index: number) {
+  function handleChange(e, index) {
     const digit = sanitizeToDigit(e.target.value);
 
     const updated = [...otp];
@@ -40,10 +34,7 @@ export default function OTPInput() {
     }
   }
 
-  function handleKeyDown(
-    e: React.KeyboardEvent<HTMLInputElement>,
-    index: number,
-  ) {
+  function handleKeyDown(e, index) {
     if (e.key === "Backspace") {
       // If current box is empty, jump back and clear previous.
       if (otp[index] === "" && index > 0) {
@@ -67,10 +58,7 @@ export default function OTPInput() {
     }
   }
 
-  function handlePaste(
-    e: React.ClipboardEvent<HTMLInputElement>,
-    index: number,
-  ) {
+  function handlePaste(e, index) {
     e.preventDefault();
 
     const pasted = e.clipboardData.getData("text");
@@ -105,7 +93,7 @@ export default function OTPInput() {
           type="text"
           autoComplete="one-time-code"
           maxLength={1}
-          className="h-16 w-14 rounded-lg border border-white/20 bg-[#28283d] text-center text-3xl font-semibold text-white outline-none transition focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2 focus-visible:ring-offset-[#28283d]"
+          className="h-24 w-20 rounded-lg border border-white/20 bg-[#28283d] text-center text-3xl font-semibold text-white outline-none transition focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2 focus-visible:ring-offset-[#28283d]"
           onFocus={(e) => e.currentTarget.select()}
           aria-label={`OTP digit ${index + 1}`}
         />

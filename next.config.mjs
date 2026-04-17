@@ -3,8 +3,8 @@ import { fileURLToPath } from "node:url";
 
 const projectRoot = path.dirname(fileURLToPath(import.meta.url));
 
+/** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Avoid picking a parent folder (e.g. ~/package-lock.json) as the app root.
   turbopack: {
     root: projectRoot,
   },

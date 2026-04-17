@@ -7,15 +7,6 @@ export default function TransactionCard({
   drawdown,
   hurdle,
   fundSize,
-}: {
-  name: string;
-  description: string;
-  status: string;
-  type: string;
-  lifetime: { label: string; value: string };
-  drawdown: { label: string; value: string };
-  hurdle: { label: string; value: string };
-  fundSize: { label: string; value: string };
 }) {
   return (
     <a href="/transactions" className="card-wrapper">

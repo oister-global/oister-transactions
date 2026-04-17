@@ -4,9 +4,7 @@ import { usePathname } from "next/navigation";
 
 export default function MainLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}) {
   const pathname = usePathname();
   const isLogin = pathname === "/login" || pathname.startsWith("/login/");
 

@@ -1,7 +1,7 @@
-import type { ReactElement } from "react";
+"use client";
 import TransactionCard from "../components/TransactionCard";
 
-export default function Page(): ReactElement {
+export default function Page() {
   return (
     <div className="grid grid-cols-2 gap-4">
       <TransactionCard

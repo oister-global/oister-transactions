@@ -2,11 +2,7 @@
 
 import ButtonsGroup from "../../components/ButtonsGroup";
 
-export default function Buttons({
-  setShowModal,
-}: {
-  setShowModal: (show: boolean) => void;
-}) {
+export default function Buttons({ setShowModal }) {
   return (
     <ButtonsGroup
       text="Show Deck"

@@ -20,7 +20,7 @@ const contactData = [
 ];
 
 export default function Footer() {
-  const items: Array<{ Icon: React.ComponentType; url: string }> = [
+  const items = [
     {
       Icon: LinkedinIcon,
       url: "https://www.linkedin.com/company/oisterglobal/mycompany/",
@@ -29,7 +29,7 @@ export default function Footer() {
     { Icon: InstagramIcon, url: "https://www.instagram.com/oisterglobal/" },
     { Icon: FacebookIcon, url: "https://www.youtube.com/@OisterGlobal" },
   ];
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
 
   return (
     <footer className="bg-[#28283d] p-10 grid grid-cols-2 justify-center items-center">

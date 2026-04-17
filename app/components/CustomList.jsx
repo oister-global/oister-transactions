@@ -16,11 +16,7 @@ const defaultListData = [
   "The Global space-tech market is expected to be INR 1.3 Lakh Cr in size by 2039 and Agnikul is expected to be one of the biggest contributors to that growth",
 ];
 
-const CustomList = ({
-  listData = defaultListData,
-}: {
-  listData?: string[];
-}) => {
+const CustomList = ({ listData = defaultListData }) => {
   return (
     <ul className="flex flex-col gap-3">
       {listData.map((item, idx) => (
