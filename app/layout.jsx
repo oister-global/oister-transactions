@@ -3,6 +3,7 @@ import { Work_Sans } from "next/font/google";
 import StoreProvider from "./store/StoreProvider";
 import Header from "./components/Header";
 import MainLayout from "./components/MainLayout";
+import AuthGuard from "./components/AuthGuard";
 import Footer from "./components/Footer";
 import { Toaster } from "react-hot-toast";
 
@@ -22,13 +23,15 @@ export default function Layout({ children }) {
     <html lang="en">
       <body className={workSans.className}>
         <StoreProvider>
-          <div className="flex min-h-screen flex-col">
-            <div className="fixed left-0 z-50 w-full">
-              <Header />
+          <AuthGuard>
+            <div className="flex min-h-screen flex-col">
+              <div className="fixed left-0 z-50 w-full">
+                <Header />
+              </div>
+              <MainLayout>{children}</MainLayout>
             </div>
-            <MainLayout>{children}</MainLayout>
-          </div>
-          <Footer />
+            <Footer />
+          </AuthGuard>
         </StoreProvider>
         <Toaster position="top-center" />
       </body>

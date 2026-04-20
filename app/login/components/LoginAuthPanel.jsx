@@ -40,7 +40,6 @@ export default function LoginAuthPanel() {
                     email: phoneAndEmail.email,
                     otp: otp.join(""),
                   });
-                  console.log(res);
                   if (res?.data) {
                     const { data, token } = res.data;
                     if (token) {
