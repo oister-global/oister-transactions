@@ -1,3 +1,3 @@
 export default function Layout({ children }) {
-  return <div className="flex min-h-screen flex-col mt-20 p-8">{children}</div>;
+  return <div className="min-h-screen mt-20 p-8">{children}</div>;
 }

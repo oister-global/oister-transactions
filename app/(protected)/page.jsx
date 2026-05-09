@@ -5,7 +5,7 @@ import { useGetTransactionsQuery } from "../store/services/transactionsApi";
 import PageLoader from "../components/PageLoader";
 
 export default function Page() {
-  const { data, isLoading } = useGetTransactionsQuery(null);
+  const { data, isLoading } = useGetTransactionsQuery();
 
   if (isLoading) return <PageLoader />;
 

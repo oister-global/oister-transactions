@@ -1,7 +1,7 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
-import { getUserData, subscribeAuth } from "./auth";
+import { getUserData } from "./auth";
 
 function readInitialsFromStorage() {
   const user = getUserData();
@@ -16,7 +16,7 @@ function readInitialsFromStorage() {
 
 export default function useInitialsFromUserData() {
   return useSyncExternalStore(
-    (onStoreChange) => subscribeAuth(onStoreChange),
+    () => () => { },
     readInitialsFromStorage,
     () => "U",
   );

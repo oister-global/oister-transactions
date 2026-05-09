@@ -1,5 +1,5 @@
 import Image from "next/image";
-import LoginAuthPanel from "../../login/components/LoginAuthPanel";
+import LoginAuthPanel from "./components/LoginAuthPanel";
 
 export default function Page() {
   return (

@@ -3,7 +3,6 @@ import toast from "react-hot-toast";
 import { getUserToken } from "@/app/lib/auth";
 
 export function buildCustomFetchBaseQuery({ baseUrl }) {
-
   const baseQuery = fetchBaseQuery({
     baseUrl,
     prepareHeaders: (headers) => {
@@ -20,7 +19,10 @@ export function buildCustomFetchBaseQuery({ baseUrl }) {
     const result = await baseQuery(args, api, extraOptions);
     const { showToastOnSuccess, showToastOnFailure } = extraOptions;
 
-    // If you want auto-logout on 401, implement it here.
+    if (result?.error?.status === 401) {
+      clearUserSession();
+      router.replace("/login");
+    }
 
     if (showToastOnFailure && result?.error) {
       toast.error(result?.error?.data?.message || "Something went wrong");

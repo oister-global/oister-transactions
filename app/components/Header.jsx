@@ -1,17 +1,12 @@
 "use client";
 
-import { OisterLogoWhiteIcon, OisterLogoWhiteSmallIcon } from "@/public/svg";
-import Logout from "./Logout";
 import { getUserData, subscribeAuth } from "@/app/lib/auth";
-import { useEffect, useState } from "react";
+import { OisterLogoWhiteIcon, OisterLogoWhiteSmallIcon } from "@/public/svg";
+import { useSyncExternalStore } from "react";
+import Logout from "./Logout";
 
 export default function Header() {
-  // First render matches server HTML (no localStorage access).
-  const [userData, setUserData] = useState(null);
-
-  useEffect(() => {
-    return subscribeAuth(() => setUserData(getUserData()));
-  }, []);
+  const userData = useSyncExternalStore(subscribeAuth, getUserData, () => null);
 
   return (
     <header className="flex h-20 gap-px bg-white pb-px">

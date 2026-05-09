@@ -19,16 +19,17 @@ const contactData = [
   },
 ];
 
+const items = [
+  {
+    Icon: LinkedinIcon,
+    url: "https://www.linkedin.com/company/oisterglobal/mycompany/",
+  },
+  { Icon: TwitterIcon, url: "https://x.com/OisterGlobal" },
+  { Icon: InstagramIcon, url: "https://www.instagram.com/oisterglobal/" },
+  { Icon: FacebookIcon, url: "https://www.youtube.com/@OisterGlobal" },
+];
+
 export default function Footer() {
-  const items = [
-    {
-      Icon: LinkedinIcon,
-      url: "https://www.linkedin.com/company/oisterglobal/mycompany/",
-    },
-    { Icon: TwitterIcon, url: "https://x.com/OisterGlobal" },
-    { Icon: InstagramIcon, url: "https://www.instagram.com/oisterglobal/" },
-    { Icon: FacebookIcon, url: "https://www.youtube.com/@OisterGlobal" },
-  ];
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
   return (
@@ -53,7 +54,7 @@ export default function Footer() {
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
                 onClick={() => {
-                  window.open(url, "_blank", "noopener,noreferrer");
+                  window.open(url, "_blank");
                 }}
               >
                 <Icon />

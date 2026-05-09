@@ -44,23 +44,12 @@ export default function OTPInput({ otp, setOtp }) {
         setOtp(updated);
         focusIndex(prev);
       }
-      return;
     }
-
-    if (e.key === "ArrowLeft") {
-      focusIndex(index - 1);
-      return;
-    }
-
-    if (e.key === "ArrowRight") {
-      focusIndex(index + 1);
-      return;
-    }
+    if (e.key === "ArrowLeft") focusIndex(index - 1);
+    if (e.key === "ArrowRight") focusIndex(index + 1);
   }
 
   function handlePaste(e, index) {
-    e.preventDefault();
-
     const pasted = e.clipboardData.getData("text");
     const digits = pasted.replace(/\D/g, "").slice(0, length - index);
     if (digits.length === 0) return;

@@ -26,6 +26,7 @@ export default function Page() {
   });
   const [showInterest, { isLoading: isShowInterestLoading }] =
     useShowInterestMutation();
+
   const {
     heading,
     subHeading,
@@ -36,7 +37,7 @@ export default function Page() {
     index,
     isInterested,
   } = data || {};
-  console.log(data);
+
   if (isLoading) {
     return <PageLoader />;
   }
@@ -70,8 +71,9 @@ export default function Page() {
           }}
           onClick1={async () => {
             const response = await showInterest({ id });
-            console.log(response);
-            setShowModal(true);
+            if (response?.data) {
+              setShowModal(true);
+            }
           }}
           hideButton1={isInterested}
           isLoading1={isShowInterestLoading}

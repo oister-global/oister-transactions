@@ -41,7 +41,7 @@
     "app/store/store.js",
     "app/store/services/transactionsApi.js",
     "app/login/page.jsx",
-    "app/login/components/LoginAuthPanel.jsx",
+    "app/(auth)/login/components/LoginAuthPanel.jsx",
     "app/components/VideoComponent.jsx",
     "app/components/TransactionCard.jsx",
     "app/components/SecondaryButton.jsx",
@@ -53,7 +53,8 @@
     "app/components/Footer.jsx",
     "app/components/CustomList.jsx",
     "app/components/ComponentWrapper.jsx",
-    "app/login/components/EmailInputAndButton.jsx"
+    "app/(auth)/login/components/EmailInputAndButton.jsx",
+    "app/store/services/baseApi.js"
   ],
   "exclude": ["node_modules"]
 }

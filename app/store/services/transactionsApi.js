@@ -15,6 +15,9 @@ export const transactionsApi = baseApi.injectEndpoints({
         url: `/manager/transactions/i-am-interested/${id}`,
         method: "PUT",
       }),
+      extraOptions: {
+        showToastOnFailure: true,
+      },
       invalidatesTags: ["Transactions"],
     }),
   }),

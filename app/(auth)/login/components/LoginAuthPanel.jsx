@@ -5,20 +5,42 @@ import { setUserSession } from "@/app/lib/auth";
 import { useVerifyOtpMutation } from "@/app/store/services/authApi";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { ChevronIcon } from "../../../public/svg";
-import OTPInput from "../../components/OTPInput";
+import { ChevronIcon } from "../../../../public/svg";
+import OTPInput from "../../../components/OTPInput";
 import EmailInputAndButton from "./EmailInputAndButton";
 
 export default function LoginAuthPanel() {
   const [showOtp, setShowOtp] = useState(false);
   const [email, setEmail] = useState("");
   const [otp, setOtp] = useState(Array.from({ length: 4 }, () => ""));
-  const [verifyOtp, { isLoading }] = useVerifyOtpMutation();
   const [phoneAndEmail, setPhoneAndEmail] = useState({
     phone: "",
     email: "",
   });
+  const [verifyOtp, { isLoading }] = useVerifyOtpMutation();
   const router = useRouter();
+
+  const loginHandler = async () => {
+    const res = await verifyOtp({
+      email: phoneAndEmail.email,
+      otp: otp.join(""),
+    });
+    if (res?.data) {
+      const { data, token } = res.data;
+      if (token) {
+        setUserSession({
+          token,
+          userData: { ...data },
+        });
+        router.push("/");
+      }
+    }
+  };
+
+  const onClickBackHandler = () => {
+    setShowOtp(false);
+    setOtp((prev) => Array.from({ length: prev?.length }, () => ""));
+  };
 
   return (
     <div className="flex w-full max-w-[420px] flex-col items-center gap-4 px-2">
@@ -32,34 +54,12 @@ export default function LoginAuthPanel() {
             </p>
           </div>
           <div className="flex w-full gap-4">
-            <ChevronIcon
-              onClick={() => {
-                setShowOtp(false);
-                setOtp((prev) =>
-                  Array.from({ length: prev?.length }, () => ""),
-                );
-              }}
-            />
+            <ChevronIcon onClick={onClickBackHandler} />
             <div className="flex flex-col justify-center gap-4">
               <OTPInput otp={otp} setOtp={setOtp} />
               <PrimaryButton
                 text="Log In"
-                onClick={async () => {
-                  const res = await verifyOtp({
-                    email: phoneAndEmail.email,
-                    otp: otp.join(""),
-                  });
-                  if (res?.data) {
-                    const { data, token } = res.data;
-                    if (token) {
-                      setUserSession({
-                        token,
-                        userData: { ...data },
-                      });
-                    }
-                    router.push("/");
-                  }
-                }}
+                onClick={loginHandler}
                 isLoading={isLoading}
               />
             </div>

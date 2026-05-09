@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
-import getInitialsFromUserData from "../lib/getInitialsFromUserData";
-import { clearUserSession } from "../lib/auth";
 import { SignOutIcon } from "@/public/svg";
+import { useRouter } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
+import { clearUserSession } from "../lib/auth";
+import useInitialsFromUserData from "../lib/getInitialsFromUserData";
 
 export default function Logout() {
   const router = useRouter();
@@ -36,7 +36,7 @@ export default function Logout() {
         className="flex h-10 w-10 items-center justify-center rounded-full border border-white bg-[#28283d] font-semibold text-white transition hover:opacity-90 cursor-pointer"
         onClick={() => setIsOpen((prev) => !prev)}
       >
-        {getInitialsFromUserData()}
+        {useInitialsFromUserData()}
       </button>
 
       {isOpen && (

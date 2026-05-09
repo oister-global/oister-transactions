@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 export default function Modal({
   title = "",
   description = "",
-  buttonText = "Go back to Dashboard",
+  buttonText,
   show = false,
 }) {
   const router = useRouter();

@@ -1,8 +1,7 @@
 "use client";
 
 import { useSendOtpMutation } from "@/app/store/services/authApi";
-import PrimaryButton from "../../components/PrimaryButton";
-import toast from "react-hot-toast";
+import PrimaryButton from "../../../components/PrimaryButton";
 
 export default function EmailInputAndButton({
   setShowOtp,
@@ -11,6 +10,18 @@ export default function EmailInputAndButton({
   setPhoneAndEmail,
 }) {
   const [sendOtp, { isLoading }] = useSendOtpMutation();
+
+  const continueHandler = async () => {
+    const data = await sendOtp({ email });
+    if (data?.data?.data?.phone) {
+      setPhoneAndEmail({
+        phone: data.data.data.phone,
+        email,
+      });
+      setShowOtp(true);
+    }
+  };
+
   return (
     <div className="flex w-[300px] flex-col gap-4">
       <div className="text-white text-center text-xs">
@@ -26,16 +37,7 @@ export default function EmailInputAndButton({
       />
       <PrimaryButton
         text="Continue"
-        onClick={async () => {
-          const data = await sendOtp({ email });
-          if (data?.data?.data?.phone) {
-            setPhoneAndEmail({
-              phone: data.data.data.phone,
-              email,
-            });
-            setShowOtp(true);
-          }
-        }}
+        onClick={continueHandler}
         isLoading={isLoading}
       />
     </div>

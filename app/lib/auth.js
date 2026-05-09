@@ -5,14 +5,22 @@ const USER_DATA = "user-data";
 const AUTH_CHANGE_EVENT = "oister:auth-change";
 
 function notifyAuthChange() {
-  if (typeof window === "undefined") return null;
   window.dispatchEvent(new Event(AUTH_CHANGE_EVENT));
 }
 
+let cachedRaw = null;
+let cachedUserData = null;
+
 export function getUserData() {
+
   if (typeof window === "undefined") return null;
-  const stored = window.localStorage.getItem(USER_DATA);
-  return stored ? JSON.parse(stored) : null;
+  const raw = localStorage.getItem(USER_DATA);
+  if (raw === cachedRaw) {
+    return cachedUserData;
+  }
+  cachedRaw = raw;
+  cachedUserData = raw ? JSON.parse(raw) : null;
+  return cachedUserData;
 }
 
 export function getUserToken() {
@@ -36,11 +44,8 @@ export function clearUserSession() {
 
 export function subscribeAuth(listener) {
   if (typeof window === "undefined") return () => { };
-  const wrapped = () => listener?.();
-  window.addEventListener("storage", wrapped);
-  window.addEventListener(AUTH_CHANGE_EVENT, wrapped);
+  window.addEventListener(AUTH_CHANGE_EVENT, listener);
   return () => {
-    window.removeEventListener("storage", wrapped);
-    window.removeEventListener(AUTH_CHANGE_EVENT, wrapped);
+    window.removeEventListener(AUTH_CHANGE_EVENT, listener);
   };
 }
