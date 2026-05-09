@@ -15,7 +15,7 @@ export function StarIcon() {
   );
 }
 
-export function ChevronIcon({ onClick }) {
+export function ChevronIcon({ onClick, color }) {
   return (
     <button
       type="button"
@@ -26,7 +26,7 @@ export function ChevronIcon({ onClick }) {
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
         fill="none"
-        stroke="currentColor"
+        stroke={color || "currentColor"}
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -74,36 +74,16 @@ export function TwitterIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      xmlnsXlink="http://www.w3.org/1999/xlink"
-      width="32"
-      height="32"
-      viewBox="0 0 32 32"
+      width="28"
+      height="28"
+      viewBox="0 0 24 24"
       fill="none"
+      aria-hidden
     >
-      <rect width="32" height="32" rx="16" />
-      <rect
-        x="5.33301"
-        y="5.33398"
-        width="21.3333"
-        height="21.3333"
-        fill="url(#pattern0_6741_101)"
+      <path
+        d="M18.9 2H22l-6.77 7.74L23.2 22h-6.25l-4.9-6.67L6.2 22H3.1l7.25-8.29L2.8 2h6.4l4.44 6.08L18.9 2Zm-1.1 18h1.73L8.2 3.9H6.35L17.8 20Z"
+        fill="#6573E4"
       />
-      <defs>
-        <pattern
-          id="pattern0_6741_101"
-          patternContentUnits="objectBoundingBox"
-          width="1"
-          height="1"
-        >
-          <use xlinkHref="#image0_6741_101" transform="scale(0.01)" />
-        </pattern>
-        <image
-          id="image0_6741_101"
-          width="100"
-          height="100"
-          xlinkHref="data:image/png;base64,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"
-        />
-      </defs>
     </svg>
   );
 }
@@ -275,7 +255,7 @@ export function OisterLogoWhiteSmallIcon() {
   );
 }
 
-export const LoaderIcon = () => {
+export const LoaderIcon = ({ color }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -291,7 +271,7 @@ export const LoaderIcon = () => {
         cx="16"
         cy="16"
         r="10"
-        stroke="#FFFFFF"
+        stroke={color || "#FFFFFF"}
         strokeWidth="2.5"
         opacity="0.35"
       />
@@ -301,6 +281,26 @@ export const LoaderIcon = () => {
         strokeWidth="2.5"
         strokeLinecap="round"
       />
+    </svg>
+  );
+};
+
+export const SignOutIcon = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="red"
+      strokeWidth="2.4"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="m16 17 5-5-5-5" />
+      <path d="M21 12H9" />
+      <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
     </svg>
   );
 };

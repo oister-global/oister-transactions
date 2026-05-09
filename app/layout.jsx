@@ -1,11 +1,10 @@
-import "./globals.css";
 import { Work_Sans } from "next/font/google";
-import StoreProvider from "./store/StoreProvider";
-import Header from "./components/Header";
-import MainLayout from "./components/MainLayout";
+import { Toaster } from "react-hot-toast";
 import AuthGuard from "./components/AuthGuard";
 import Footer from "./components/Footer";
-import { Toaster } from "react-hot-toast";
+import Header from "./components/Header";
+import "./globals.css";
+import StoreProvider from "./store/StoreProvider";
 
 const workSans = Work_Sans({
   subsets: ["latin"],
@@ -15,7 +14,7 @@ const workSans = Work_Sans({
 export const metadata = {
   title: "Oister Transactions",
   description:
-    "This is a B2B transaction discovery platform for Relationship Managers.",
+    "Oister Transactions Platform for Relationship Managers to discover and express interest in transactions",
 };
 
 export default function Layout({ children }) {
@@ -23,15 +22,15 @@ export default function Layout({ children }) {
     <html lang="en">
       <body className={workSans.className}>
         <StoreProvider>
-          <AuthGuard>
-            <div className="flex min-h-screen flex-col">
+          <div className="flex min-h-screen flex-col">
+            <AuthGuard>
               <div className="fixed left-0 z-50 w-full">
                 <Header />
               </div>
-              <MainLayout>{children}</MainLayout>
-            </div>
-            <Footer />
-          </AuthGuard>
+              {children}
+            </AuthGuard>
+          </div>
+          <Footer />
         </StoreProvider>
         <Toaster position="top-center" />
       </body>

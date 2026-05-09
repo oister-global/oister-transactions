@@ -1,6 +1,6 @@
 "use client";
 
-import ButtonsGroup from "../../components/ButtonsGroup";
+import ButtonsGroup from "@/app/components/ButtonsGroup";
 
 export default function Buttons({ setShowModal }) {
   return (

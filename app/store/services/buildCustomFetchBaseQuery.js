@@ -1,12 +1,13 @@
 import { fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import toast from "react-hot-toast";
-import { getToken } from "@/app/lib/auth";
+import { getUserToken } from "@/app/lib/auth";
 
-export const buildCustomFetchBaseQuery = ({ baseUrl }) => {
+export function buildCustomFetchBaseQuery({ baseUrl }) {
+
   const baseQuery = fetchBaseQuery({
     baseUrl,
     prepareHeaders: (headers) => {
-      const token = getToken();
+      const token = getUserToken();
       if (token) headers.set("Authorization", `Bearer ${token}`);
       return headers;
     },

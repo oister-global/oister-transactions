@@ -8,6 +8,18 @@ const nextConfig = {
   turbopack: {
     root: projectRoot,
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "oistercdn.s3.ap-south-1.amazonaws.com",
+      },
+      {
+        protocol: "https",
+        hostname: "oister-transactions.s3.ap-south-1.amazonaws.com",
+      },
+    ],
+  },
 };
 
 export default nextConfig;

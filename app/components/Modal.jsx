@@ -3,14 +3,15 @@
 import { useEffect } from "react";
 import { SuccessIcon } from "@/public/svg";
 import PrimaryButton from "./PrimaryButton";
+import { useRouter } from "next/navigation";
 
 export default function Modal({
   title = "",
   description = "",
   buttonText = "Go back to Dashboard",
   show = false,
-  setShowModal,
 }) {
+  const router = useRouter();
   useEffect(() => {
     if (!show) return;
     const prev = document.body.style.overflow;
@@ -35,10 +36,7 @@ export default function Modal({
         <p className="mb-6 text-sm leading-relaxed text-gray-500">
           {description}
         </p>
-        <PrimaryButton
-          text={buttonText}
-          onClick={() => setShowModal(false)}
-        />
+        <PrimaryButton text={buttonText} onClick={() => router.push("/")} />
       </div>
     </div>
   );

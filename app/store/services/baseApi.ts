@@ -4,7 +4,8 @@ import { buildCustomFetchBaseQuery } from "./buildCustomFetchBaseQuery.js";
 export const baseApi = createApi({
   reducerPath: "api",
   baseQuery: buildCustomFetchBaseQuery({
-    baseUrl: "http://localhost:3001",
+    baseUrl: "http://localhost:3000",
   }),
+  tagTypes: ["Transactions"],
   endpoints: () => ({}),
 });

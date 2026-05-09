@@ -36,7 +36,7 @@
     "public/svg.jsx",
     "app/layout.jsx",
     "app/transactions/page.jsx",
-    "app/transactions/components/Buttons.jsx",
+    "app/(protected)/[id]/components/Buttons.jsx",
     "app/store/StoreProvider.jsx",
     "app/store/store.js",
     "app/store/services/transactionsApi.js",
