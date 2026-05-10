@@ -20,7 +20,7 @@ export const metadata = {
 export default function Layout({ children }) {
   return (
     <html lang="en">
-      <body className={workSans.className}>
+      <body className={`${workSans.className} text-base antialiased`}>
         <StoreProvider>
           <div className="flex min-h-screen flex-col">
             <AuthGuard>
