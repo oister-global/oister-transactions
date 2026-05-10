@@ -6,7 +6,7 @@ const CustomList = ({ listData }) => {
     <ul className="flex flex-col gap-3">
       {listData?.map((item, idx) => (
         <li key={idx} className="flex items-center gap-2">
-          <span className="text-[14px]">
+          <span className="text-sm">
             <StarIcon />
           </span>
           <span className="text-base font-normal leading-[1.55] text-[#696C7A]">

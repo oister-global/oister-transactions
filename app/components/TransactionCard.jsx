@@ -57,7 +57,7 @@ export default function TransactionCard({
               key={label}
               className="rounded-lg border border-[#e8eaef] bg-[#f6f7f9] p-3"
             >
-              <dt className="mb-1 text-[10px] font-semibold uppercase text-[#8f949e]">
+              <dt className="mb-1 text-xs font-semibold uppercase tracking-wide text-[#8f949e]">
                 {label}
               </dt>
               <dd className="text-sm font-medium leading-snug text-[#2a2d36]">

@@ -11,7 +11,9 @@ export default function ComponentWrapper({
             <h2 className="text-xl font-semibold text-[#28283B]">
               {heading.toUpperCase()}
             </h2>
-            <p className="text-base font-normal text-[#696C7A]">{subHeading}</p>
+            <p className="sm:text-base xxs:text-sm font-normal text-[#696C7A]">
+              {subHeading}
+            </p>
           </div>
         )}
         <div className="flex flex-col gap-3">{children}</div>

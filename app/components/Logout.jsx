@@ -43,7 +43,7 @@ export default function Logout() {
         <div className="absolute right-0 top-12 z-20 min-w-[170px] overflow-hidden rounded-lg border border-gray-200 bg-white p-1 shadow-lg">
           <button
             type="button"
-            className="flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-[16px] font-medium text-[#28283d] transition hover:bg-gray-100 cursor-pointer"
+            className="flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-base font-medium text-[#28283d] transition hover:bg-gray-100 cursor-pointer"
             onClick={handleLogout}
           >
             <SignOutIcon />

@@ -33,16 +33,16 @@ export default function Footer() {
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
   return (
-    <footer className="bg-[#28283d] p-10 grid grid-cols-2 justify-center items-center">
+    <footer className="bg-[#28283d] sm:p-10 xxs:p-2 grid grid-cols-2 justify-center items-center">
       <div className="col-span-1">
-        <div className="flex flex-col gap-4 w-[224px]">
+        <div className="flex flex-col gap-4 sm:w-[224px] xxs:w-[160px] h-[66px] items-center justify-center">
           <Image
             alt="oister-logo"
             src={"https://oistercdn.s3.ap-south-1.amazonaws.com/main-logo.svg"}
             width={224}
             height={66}
           />
-          <div className="w-full flex justify-between px-4">
+          <div className="w-full flex justify-between sm:px-4">
             {items.map(({ Icon, url }, index) => (
               <div
                 className={`flex h-10 w-10 items-center justify-center rounded-full bg-[#36364D] ${
@@ -54,7 +54,7 @@ export default function Footer() {
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
                 onClick={() => {
-                  window.open(url, "_blank");
+                  window.open(url, "_blank", "noopener,noreferrer");
                 }}
               >
                 <Icon />
@@ -70,7 +70,7 @@ export default function Footer() {
             className="flex flex-col gap-3 text-[#F6F7F9] text-center"
           >
             <div className="text-base font-semibold">{heading}</div>
-            <div className="text-sm opacity-90">{address}</div>
+            <div className="sm:text-sm xxs:text-xs opacity-90">{address}</div>
             <a
               className="text-sm wrap-break-word hover:underline"
               href={`mailto:${email}`}

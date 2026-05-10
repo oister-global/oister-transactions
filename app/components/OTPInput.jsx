@@ -66,7 +66,7 @@ export default function OTPInput({ otp, setOtp }) {
   }
 
   return (
-    <div className="flex flex-row items-center justify-center gap-3">
+    <div className="flex flex-row flex-wrap items-center justify-center gap-2 sm:gap-3">
       {otp.map((value, index) => (
         <input
           key={ids[index] ?? index}
@@ -82,7 +82,7 @@ export default function OTPInput({ otp, setOtp }) {
           type="text"
           autoComplete="one-time-code"
           maxLength={1}
-          className="h-24 w-20 rounded-lg border border-white/20 bg-[#28283d] text-center text-3xl font-semibold text-white outline-none transition focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2 focus-visible:ring-offset-[#28283d]"
+          className="h-20 w-14 rounded-lg border border-white/20 bg-[#28283d] text-center text-2xl font-semibold text-white outline-none transition focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2 focus-visible:ring-offset-[#28283d] sm:h-24 sm:w-20 sm:text-3xl"
           onFocus={(e) => e.currentTarget.select()}
           aria-label={`OTP digit ${index + 1}`}
         />

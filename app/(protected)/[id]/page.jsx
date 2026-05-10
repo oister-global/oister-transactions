@@ -43,18 +43,21 @@ export default function Page() {
   }
 
   return (
-    <div className="flex flex-col gap-8">
-      <div className="relative w-screen h-60 m-[-32px] mb-0">
+    <div className="flex flex-col sm:gap-8 xxs:gap-6">
+      <div className="relative left-1/2 h-60 w-screen max-w-[100vw] shrink-0 -translate-x-1/2 xxs:-mt-3 sm:-mt-8">
         <Image
           src={backgroundImage(index)}
           alt={trimHTML(heading) || "background image"}
           fill
+          sizes="100vw"
+          className="object-cover"
+          priority
         />
       </div>
-      <div className="flex flex-col gap-8">
+      <div className="flex flex-col sm:gap-8 xxs:gap-4">
         <div className="flex items-center gap-2 ml-[-6px]">
           <ChevronIcon onClick={() => router.back()} color="#252525" />
-          <div className="text-[32px] text-[#252525] font-semibold leading-9">
+          <div className="text-2xl font-semibold leading-8 text-[#252525] sm:text-3xl md:text-[32px] md:leading-9">
             {trimHTML(heading)}
           </div>
         </div>
@@ -62,7 +65,7 @@ export default function Page() {
           {trimHTML(subHeading)}
         </div>
       </div>
-      <div className="sticky top-24 z-10">
+      <div className="sticky xxs:top-22  sm:top-24 z-10">
         <ButtonsGroup
           text="Show Deck"
           text1="I'm Interested"
