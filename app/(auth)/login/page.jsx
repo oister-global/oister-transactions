@@ -5,7 +5,7 @@ export default function Page() {
   return (
     <main className="mb-px flex flex-1 gap-px h-screen mt-20">
       <div className="flex flex-1 flex-col relative xxs:hidden sm:block">
-        <Image src="/para.png" alt="background" fill />
+        <Image src="/horses.png" alt="background" fill />
       </div>
       <div className="flex flex-1 flex-col bg-[#28283d]">
         <div className="grid flex-1 place-items-center">

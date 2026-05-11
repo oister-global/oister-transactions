@@ -4,7 +4,6 @@ import ButtonsGroup from "@/app/components/ButtonsGroup";
 import ComponentWrapper from "@/app/components/ComponentWrapper";
 import CustomList from "@/app/components/CustomList";
 import Modal from "@/app/components/Modal";
-import PageLoader from "@/app/components/PageLoader";
 import VideoComponent from "@/app/components/VideoComponent";
 import backgroundImage from "@/app/lib/backgroundImage";
 import { htmlListToArray, trimHTML } from "@/app/lib/htmlConversion";
@@ -16,6 +15,7 @@ import { ChevronIcon } from "@/public/svg";
 import Image from "next/image";
 import { notFound, useParams, useRouter } from "next/navigation";
 import { useState } from "react";
+import Loading from "@/app/loading";
 
 export default function Page() {
   const [showModal, setShowModal] = useState(false);
@@ -27,6 +27,7 @@ export default function Page() {
   const [showInterest, { isLoading: isShowInterestLoading }] =
     useShowInterestMutation();
 
+  if (isLoading) return <Loading />;
   if (isError) notFound();
 
   const {
@@ -39,10 +40,6 @@ export default function Page() {
     index,
     isInterested,
   } = data || {};
-
-  if (isLoading) {
-    return <PageLoader />;
-  }
 
   return (
     <div className="flex flex-col sm:gap-8 xxs:gap-6">

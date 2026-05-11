@@ -1,13 +1,13 @@
 "use client";
 
 import TransactionCard from "../components/TransactionCard";
+import Loading from "../loading";
 import { useGetTransactionsQuery } from "../store/services/transactionsApi";
-import PageLoader from "../components/PageLoader";
 
 export default function Page() {
   const { data, isLoading, isError } = useGetTransactionsQuery();
 
-  if (isLoading) return <PageLoader />;
+  if (isLoading) return <Loading />;
   if (isError) throw new Error();
 
 
