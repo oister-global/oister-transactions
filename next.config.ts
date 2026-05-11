@@ -16,6 +16,10 @@ const nextConfig = {
       },
       {
         protocol: "https",
+        hostname: "cdn-icons-png.flaticon.com",
+      },
+      {
+        protocol: "https",
         hostname: "oister-transactions.s3.ap-south-1.amazonaws.com",
       },
     ],

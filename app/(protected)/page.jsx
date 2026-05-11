@@ -5,9 +5,11 @@ import { useGetTransactionsQuery } from "../store/services/transactionsApi";
 import PageLoader from "../components/PageLoader";
 
 export default function Page() {
-  const { data, isLoading } = useGetTransactionsQuery();
+  const { data, isLoading, isError } = useGetTransactionsQuery();
 
   if (isLoading) return <PageLoader />;
+  if (isError) throw new Error();
+
 
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">

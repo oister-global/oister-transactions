@@ -14,18 +14,20 @@ import {
 } from "@/app/store/services/transactionsApi";
 import { ChevronIcon } from "@/public/svg";
 import Image from "next/image";
-import { useParams, useRouter } from "next/navigation";
+import { notFound, useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function Page() {
   const [showModal, setShowModal] = useState(false);
   const { id } = useParams();
   const router = useRouter();
-  const { data: { data = {} } = {}, isLoading } = useGetTransactionQuery({
+  const { data: { data = {} } = {}, isLoading, isError } = useGetTransactionQuery({
     id,
   });
   const [showInterest, { isLoading: isShowInterestLoading }] =
     useShowInterestMutation();
+
+  if (isError) notFound();
 
   const {
     heading,
