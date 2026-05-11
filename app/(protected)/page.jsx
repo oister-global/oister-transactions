@@ -10,7 +10,6 @@ export default function Page() {
   if (isLoading) return <Loading />;
   if (isError) throw new Error();
 
-
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
       {data?.data?.map(

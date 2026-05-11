@@ -51,7 +51,7 @@ export default function TransactionCard({
           )}
         </div>
 
-        <dl className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+        <dl className="grid grid-cols-2 gap-3 lg:grid-cols-4">
           {data?.map(({ label, value }) => (
             <div
               key={label}
