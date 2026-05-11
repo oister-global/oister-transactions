@@ -1,11 +1,10 @@
 "use client";
 
 import { useEffect, useLayoutEffect } from "react";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 export default function ScrollToTop() {
   const pathname = usePathname();
-  const search = useSearchParams().toString();
 
   useEffect(() => {
     if (!("scrollRestoration" in window.history)) {
@@ -34,7 +33,7 @@ export default function ScrollToTop() {
     return () => {
       window.cancelAnimationFrame(frame);
     };
-  }, [pathname, search]);
+  }, [pathname]);
 
   return null;
 }
