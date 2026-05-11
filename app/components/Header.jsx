@@ -12,12 +12,12 @@ export default function Header() {
     <header className="flex h-20 gap-px bg-white pb-px">
       <div className="flex-1 bg-[#28283d]">
         <div className="flex h-full items-center px-10">
-          <OisterLogoWhiteSmallIcon />
+          <OisterLogoWhiteIcon />
         </div>
       </div>
       <div className="flex-1 bg-[#28283d] flex items-center justify-end">
         <div className="px-10 flex items-center gap-4">
-          {userData ? <Logout /> : <OisterLogoWhiteIcon />}
+          {userData ? <Logout /> : <OisterLogoWhiteSmallIcon />}
         </div>
       </div>
     </header>
