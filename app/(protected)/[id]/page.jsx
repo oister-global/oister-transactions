@@ -2,7 +2,6 @@
 
 import ButtonsGroup from "@/app/components/ButtonsGroup";
 import ComponentWrapper from "@/app/components/ComponentWrapper";
-import CustomList from "@/app/components/CustomList";
 import Modal from "@/app/components/Modal";
 import VideoComponent from "@/app/components/VideoComponent";
 import backgroundImage from "@/app/lib/backgroundImage";
@@ -18,8 +17,13 @@ import { useState } from "react";
 import Loading from "@/app/loading";
 import KeyHighlights from "@/app/components/KeyHighlights";
 import LeadershipTeam from "@/app/components/LeadershipTeam";
-import CompanyInsights from "@/app/components/CompanyInsights";
 import KeyInvestors from "@/app/components/KeyInvestors";
+import FAQs from "@/app/components/FAQs";
+import FinancialProjections from "@/app/components/Financial";
+import CapTable from "@/app/components/CapTable";
+import ShareholdingSection from "@/app/components/ShareholdingSection";
+import CompanyNews from "@/app/components/CompanyNews";
+import RelatedTransactions from "@/app/components/RelatedTransactions";
 
 const KEY_HIGHLIGHTS = [
   {
@@ -88,7 +92,7 @@ export default function Page() {
           {trimHTML(subHeading)}
         </div>
       </div>
-      <div className="sticky xxs:top-22  sm:top-24 z-10">
+      <div className="sticky xxs:top-22  sm:top-24 z-20">
         <ButtonsGroup
           text="Show Deck"
           text1="I'm Interested"
@@ -105,14 +109,19 @@ export default function Page() {
           isLoading1={isShowInterestLoading}
         />
       </div>
-      <KeyHighlights listData={KEY_HIGHLIGHTS} />
+      <KeyHighlights listData={KEY_HIGHLIGHTS} bulletListData={htmlListToArray(bulletPoints)} />
+      <FinancialProjections />
+      <ShareholdingSection />
       <LeadershipTeam />
-      <CompanyInsights />
-      <KeyInvestors />
-      <ComponentWrapper>
-        <CustomList listData={htmlListToArray(bulletPoints)} />
-      </ComponentWrapper>
+
+      <CapTable />
+      <CompanyNews companyName="Bombay Shaving" />
       <VideoComponent videoLink={trimHTML(videoLink)} />
+      <FAQs />
+      <ComponentWrapper>
+        <KeyInvestors />
+      </ComponentWrapper>
+      <RelatedTransactions currentId={id} />
       <ComponentWrapper
         heading="DISCLAIMER"
         subHeading={trimHTML(disclaimer)}

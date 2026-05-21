@@ -15,5 +15,11 @@ body {
 }
 
 .card-wrapper {
-  @apply rounded-xl border border-[#e8eaef] bg-[#fcfcfd] shadow-[0_1px_2px_rgba(0,0,0,0.04)] transition-all duration-200 hover:-translate-y-px hover:border-[#dce0e8] hover:bg-white hover:shadow-[0_6px_20px_rgba(0,0,0,0.05)] sm:p-6 xxs:p-3;
+  @apply rounded-xl border border-[#b0b5c4] bg-white shadow-[0_2px_12px_rgba(0,0,0,0.08)] transition-all duration-200 hover:-translate-y-px hover:border-[#8a8f9e] hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)] sm:p-4 xxs:p-2;
 }
+
+.card-wrapper h2 {
+  text-transform: uppercase;
+}
+
+
