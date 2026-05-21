@@ -16,6 +16,30 @@ import Image from "next/image";
 import { notFound, useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import Loading from "@/app/loading";
+import KeyHighlights from "@/app/components/KeyHighlights";
+import LeadershipTeam from "@/app/components/LeadershipTeam";
+import CompanyInsights from "@/app/components/CompanyInsights";
+import KeyInvestors from "@/app/components/KeyInvestors";
+
+const KEY_HIGHLIGHTS = [
+  {
+    title: "Fastest Growing Grooming Brand",
+    subtitle: "100% revenue growth (9MFY26)",
+  },
+  {
+    title: "Market Leader",
+    subtitle: "30% share in Quick Com. in trimmers",
+  },
+  {
+    title: "Digital First Brand",
+    subtitle:
+      "73% of Revenue from D2C & Marketplaces driving profitable growth",
+  },
+  {
+    title: "Highest Brand Recall",
+    subtitle: "52% share of voice",
+  },
+];
 
 export default function Page() {
   const [showModal, setShowModal] = useState(false);
@@ -43,7 +67,7 @@ export default function Page() {
 
   return (
     <div className="flex flex-col sm:gap-8 xxs:gap-6">
-      <div className="relative left-1/2 h-60 w-screen max-w-[100vw] shrink-0 -translate-x-1/2 xxs:-mt-3 sm:-mt-8">
+      <div className="relative left-1/2 xxs:aspect-1928/400 sm:aspect-1928/300 w-screen max-w-[100vw] shrink-0 -translate-x-1/2 overflow-hidden xxs:-mt-3 sm:-mt-8">
         <Image
           src={backgroundImage(index)}
           alt={trimHTML(heading) || "background image"}
@@ -81,6 +105,10 @@ export default function Page() {
           isLoading1={isShowInterestLoading}
         />
       </div>
+      <KeyHighlights listData={KEY_HIGHLIGHTS} />
+      <LeadershipTeam />
+      <CompanyInsights />
+      <KeyInvestors />
       <ComponentWrapper>
         <CustomList listData={htmlListToArray(bulletPoints)} />
       </ComponentWrapper>

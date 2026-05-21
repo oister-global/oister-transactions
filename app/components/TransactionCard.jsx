@@ -25,7 +25,7 @@ export default function TransactionCard({
   return (
     <a href={`/${id}`} className="card-wrapper">
       <article className="flex flex-col gap-5">
-        <div className="relative w-full h-40 rounded-tl-lg rounded-tr-lg overflow-hidden">
+        <div className="relative w-full xxs:aspect-1928/400 sm:aspect-1928/300 rounded-tl-lg rounded-tr-lg overflow-hidden">
           <Image src={backgroundImage(index)} alt={trimHTML(heading)} fill />
         </div>
         <header className="flex flex-col gap-2">
@@ -45,7 +45,7 @@ export default function TransactionCard({
             </span>
           </div>
           {isInterested && (
-            <span className="rounded-sm bg-[#138808] px-2 py-1 text-sm text-white">
+            <span className="rounded-sm border border-[#cce9d1] bg-[#eef8f0] px-2 py-1 text-sm font-medium text-[#1f7a36]">
               Shown Interest
             </span>
           )}

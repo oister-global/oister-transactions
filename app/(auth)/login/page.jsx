@@ -19,6 +19,7 @@ export default function Page() {
           <div className="xxs:pb-20 sm:pb-0">
             <LoginAuthPanel />
           </div>
+          <div></div>
         </div>
       </div>
     </main>
