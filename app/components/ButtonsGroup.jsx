@@ -12,7 +12,7 @@ export default function ButtonsGroup({
   isLoading1,
 }) {
   return (
-    <div className="flex flex-nowrap gap-4 p-1 bg-white rounded-lg w-fit border border-[#e8eaef]">
+    <div className="flex flex-nowrap gap-2 sm:gap-4 p-1 bg-white rounded-lg w-fit border border-[#e8eaef]">
       <PrimaryButton text={text} onClick={onClick} isLoading={false} />
       {!hideButton1 && (
         <SecondaryButton

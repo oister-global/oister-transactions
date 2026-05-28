@@ -79,7 +79,7 @@ export default function RelatedTransactions({ currentId }) {
   if (isLoading || related.length === 0) return null;
 
   return (
-    <section className="card-wrapper">
+    <section className="section-card">
       <div className="flex flex-col gap-4">
         <h2 className="text-xl font-semibold text-[#28283B]">
           Explore our other Transactions

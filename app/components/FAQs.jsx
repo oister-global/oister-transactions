@@ -107,12 +107,19 @@ export default function FAQs() {
   const rightColumn = FAQS.slice(half);
 
   return (
-    <section className="card-wrapper">
+    <section className="section-card">
       <div className="flex flex-col gap-6">
         <h2 className="text-xl font-semibold text-[#28283B]">
           FAQs ABOUT BOMBAY SHAVING
         </h2>
-        <div className="grid gap-x-8 sm:grid-cols-2">
+        {/* Mobile: single column */}
+        <div className="divide-y divide-[#e8eaef] sm:hidden">
+          {FAQS.map((faq) => (
+            <FAQItem key={faq.question} {...faq} />
+          ))}
+        </div>
+        {/* Desktop: two-column */}
+        <div className="hidden sm:grid gap-x-8 sm:grid-cols-2">
           <div className="divide-y divide-[#e8eaef]">
             {leftColumn.map((faq) => (
               <FAQItem key={faq.question} {...faq} />

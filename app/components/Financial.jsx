@@ -40,7 +40,7 @@ const BULLET_POINTS = [
 
 export default function FinancialProjections() {
   return (
-    <section className="card-wrapper">
+    <section className="section-card">
       <div className="flex flex-col gap-6">
         <h2 className="text-xl font-semibold text-[#28283B]">
           FINANCIAL
@@ -52,7 +52,7 @@ export default function FinancialProjections() {
                 <th className="border border-[#3f3f5c] px-4 py-5 text-left font-semibold text-white">
                   Particulars
                 </th>
-                {COLUMNS.map((col, i) => (
+                {COLUMNS.map((col) => (
                   <th
                     key={col}
                     className="border border-[#3f3f5c] px-4 py-5 text-center font-semibold text-white"

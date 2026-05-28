@@ -31,7 +31,7 @@ const POINTS = [
 
 export default function ShareholdingSection() {
   return (
-    <section className="card-wrapper">
+    <section className="section-card">
       <div className="flex flex-col gap-4">
         <h2 className="text-xl font-semibold text-[#28283B]">SHAREHOLDING & LAST ROUND</h2>
         <ul className="flex flex-col gap-3">

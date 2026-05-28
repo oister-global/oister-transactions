@@ -22,9 +22,9 @@ const LEADERSHIP = [
   },
 ];
 
-function LeaderAvatar({ image, name }) {
+function LeaderAvatar({ image, name, className = "" }) {
   return (
-    <div className="relative flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-full bg-[#d9e8b5] sm:h-24 sm:w-24">
+    <div className={`relative flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-full bg-[#d9e8b5] sm:h-24 sm:w-24 ${className}`}>
       {image ? (
         <Image
           src={image}
@@ -44,25 +44,45 @@ function LeaderAvatar({ image, name }) {
 
 export default function LeadershipTeam() {
   return (
-    <section className="card-wrapper">
+    <section className="section-card">
       <div className="flex flex-col gap-6">
         <h2 className="text-xl font-semibold text-[#28283B]">KEY MANAGEMENT TEAM</h2>
         <div className="flex flex-col divide-y divide-[#e8eaef]">
           {LEADERSHIP.map(({ name, title, bullets, image }) => (
-            <div key={name} className="flex gap-5 py-6 first:pt-0 last:pb-0">
-              <LeaderAvatar image={image} name={name} />
-              <div className="flex flex-col gap-2">
-                <div>
-                  <p className="text-base font-semibold text-[#28283B]">{name}</p>
-                  <p className="text-sm text-[#696C7A]">{title}</p>
+            <div key={name} className="py-6 first:pt-0 last:pb-0">
+              {/* Mobile: avatar + name in row, bullets below full-width */}
+              <div className="sm:hidden flex flex-col gap-3">
+                <div className="flex items-center gap-4">
+                  <LeaderAvatar image={image} name={name} />
+                  <div className="min-w-0">
+                    <p className="text-base font-semibold text-[#28283B]">{name}</p>
+                    <p className="text-sm text-[#696C7A]">{title}</p>
+                  </div>
                 </div>
-                <ul className="flex flex-col gap-1 pl-4">
+                <ul className="list-disc pl-5 space-y-1">
                   {bullets.map((b) => (
-                    <li key={b} className="list-disc text-sm leading-relaxed text-[#696C7A]">
+                    <li key={b} className="text-sm leading-relaxed text-[#696C7A]">
                       {b}
                     </li>
                   ))}
                 </ul>
+              </div>
+              {/* Desktop: flex side-by-side */}
+              <div className="hidden sm:flex gap-5">
+                <LeaderAvatar image={image} name={name} />
+                <div className="flex flex-col gap-2">
+                  <div>
+                    <p className="text-base font-semibold text-[#28283B]">{name}</p>
+                    <p className="text-sm text-[#696C7A]">{title}</p>
+                  </div>
+                  <ul className="flex flex-col gap-1 pl-4">
+                    {bullets.map((b) => (
+                      <li key={b} className="list-disc text-sm leading-relaxed text-[#696C7A]">
+                        {b}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </div>
           ))}

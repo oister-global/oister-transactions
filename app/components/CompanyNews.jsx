@@ -70,7 +70,7 @@ export default function CompanyNews({ companyName }) {
   const recentCount = articles.filter((a) => new Date(a.publishedAt) > oneYearAgo).length;
 
   return (
-    <section className="card-wrapper">
+    <section className="section-card">
       <div className="flex flex-col gap-6">
         <div className="flex items-start justify-between gap-4">
           <div className="flex flex-col gap-1">

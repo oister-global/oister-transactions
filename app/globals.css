@@ -7,7 +7,7 @@
 
 html,
 body {
-  height: 100%;
+  background-color: #f0f2f5;
 }
 
 body {
@@ -22,4 +22,17 @@ body {
   text-transform: uppercase;
 }
 
+.section-card {
+  @apply rounded-xl border border-gray-300 shadow-[0_2px_12px_rgba(0,0,0,0.08)] sm:p-6 xxs:p-4 relative;
+  background: linear-gradient(160deg, #eff6ff 0%, #ffffff 40%);
+}
+
+.section-card h2 {
+  text-transform: uppercase;
+}
+
+/* Hide scrollbar on mobile section nav */
+.mobile-nav-scroll::-webkit-scrollbar {
+  display: none;
+}
 

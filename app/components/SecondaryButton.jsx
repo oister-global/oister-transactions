@@ -6,7 +6,7 @@ const SecondaryButton = ({ text, onClick, isLoading }) => {
   return (
     <button
       onClick={onClick}
-      className="h-10 cursor-pointer flex-nowrap rounded-lg border border-[#516dc9] px-4 text-base font-medium text-[#516dc9] transition-all duration-300 hover:bg-[#f0f3ff] bg-white sm:min-w-40 xxs:min-w-36"
+      className="h-10 cursor-pointer flex-nowrap rounded-lg border border-[#516dc9] px-2 sm:px-4 text-sm sm:text-base font-medium text-[#516dc9] transition-all duration-300 hover:bg-[#f0f3ff] bg-white sm:min-w-40"
     >
       {isLoading ? (
         <div className="flex items-center justify-center">

@@ -11,12 +11,12 @@ export default function Header() {
   return (
     <header className="flex h-20 gap-px bg-white pb-px">
       <div className="flex-1 bg-[#28283d]">
-        <div className="flex h-full items-center px-10">
+        <div className="flex h-full items-center px-4 sm:px-10">
           <OisterLogoWhiteIcon />
         </div>
       </div>
       <div className="flex-1 bg-[#28283d] flex items-center justify-end">
-        <div className="px-10 flex items-center gap-4">
+        <div className="px-4 sm:px-10 flex items-center gap-4">
           {userData ? <Logout /> : <OisterLogoWhiteSmallIcon />}
         </div>
       </div>

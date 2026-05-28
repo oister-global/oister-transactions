@@ -3,7 +3,7 @@ import { trimHTML } from "@/app/lib/htmlConversion";
 
 export default function KeyHighlights({ listData, bulletListData = [] }) {
     return (
-        <section className="card-wrapper">
+        <section className="section-card">
             <div className="flex flex-col gap-6">
                 <h2 className="text-xl font-semibold text-[#28283B]">KEY HIGHLIGHTS</h2>
                 <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
