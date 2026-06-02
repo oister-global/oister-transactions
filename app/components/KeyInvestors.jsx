@@ -35,9 +35,6 @@ function InvestorCard({ idx }) {
 export default function KeyInvestors() {
   return (
     <section>
-      <h2 className="mb-4 text-base font-semibold text-[#555573] sm:text-lg">
-        Key Investors
-      </h2>
       <div className="grid grid-cols-3 gap-3 sm:flex sm:flex-wrap sm:gap-4">
         {INVESTORS.map((_, idx) => (
           <InvestorCard key={idx} idx={idx} />

@@ -20,7 +20,7 @@ import MobileSectionNav from "@/app/components/MobileSectionNav";
 import SideNav from "@/app/components/SideNav";
 import VideoComponent from "@/app/components/VideoComponent";
 import backgroundImage from "@/app/lib/backgroundImage";
-import { htmlListToArray, trimHTML } from "@/app/lib/htmlConversion";
+import { htmlListToHtmlArray, trimHTML } from "@/app/lib/htmlConversion";
 import {
   useGetTransactionQuery,
   useShowInterestMutation,
@@ -30,13 +30,6 @@ import Image from "next/image";
 import { notFound, useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import Loading from "@/app/loading";
-
-const KEY_HIGHLIGHTS = [
-  { title: "Fastest Growing Grooming Brand", subtitle: "100% revenue growth (9MFY26)" },
-  { title: "Market Leader", subtitle: "30% share in Quick Com. in trimmers" },
-  { title: "Digital First Brand", subtitle: "73% of Revenue from D2C & Marketplaces driving profitable growth" },
-  { title: "Highest Brand Recall", subtitle: "52% share of voice" },
-];
 
 const SECTIONS = [
   { id: "highlights", label: "Key Highlights" },
@@ -63,7 +56,29 @@ export default function Page() {
   if (isLoading) return <Loading />;
   if (isError) notFound();
 
-  const { heading, subHeading, disclaimer, bulletPoints, deckLink, videoLink, index, isInterested } = data || {};
+  const {
+    heading,
+    subHeading,
+    businessSegments,
+    businessSegmentsDisclaimer,
+    keyHighlights,
+    keyHighlightsBullets,
+    investmentThesis,
+    financialColumns,
+    financialRows,
+    financialBullets,
+    shareholdingAndLastRound,
+    valuationContent,
+    valuationDisclaimer,
+    faqs,
+    disclaimer,
+    deckLink,
+    videoLink,
+    index,
+    isInterested,
+  } = data || {};
+
+  console.log("===", data)
 
   return (
     <div className="flex flex-col gap-0">
@@ -107,7 +122,7 @@ export default function Page() {
 
       {/* Business Segments — full width, below subheading */}
       <div className="pt-6">
-        <BusinessSegments />
+        <BusinessSegments SEGMENTS={businessSegments} disclaimer={businessSegmentsDisclaimer} />
       </div>
 
       <MobileSectionNav sections={SECTIONS} />
@@ -118,22 +133,22 @@ export default function Page() {
 
         <div className="flex-1 min-w-0 flex flex-col gap-5 pb-16">
           <div id="highlights">
-            <KeyHighlights listData={KEY_HIGHLIGHTS} bulletListData={htmlListToArray(bulletPoints)} />
+            <KeyHighlights listData={keyHighlights} bulletListData={htmlListToHtmlArray(keyHighlightsBullets)} />
           </div>
           <div id="thesis">
-            <InvestmentThesis />
+            <InvestmentThesis thesis={investmentThesis} />
           </div>
           <div id="financial">
-            <FinancialProjections />
+            <FinancialProjections columns={financialColumns} rows={financialRows} bullets={financialBullets} />
           </div>
           <div id="financial-chart">
-            <FinancialChart />
+            <FinancialChart columns={financialColumns} rows={financialRows} />
           </div>
           <div id="shareholding">
-            <ShareholdingSection />
+            <ShareholdingSection content={shareholdingAndLastRound} />
           </div>
           <div id="valuation">
-            <ValuationSection />
+            <ValuationSection content={valuationContent} disclaimer={valuationDisclaimer} />
           </div>
           <div id="leadership">
             <LeadershipTeam />
@@ -148,10 +163,10 @@ export default function Page() {
             <VideoComponent videoLink={trimHTML(videoLink)} />
           </div>
           <div id="faqs">
-            <FAQs />
+            <FAQs faqs={faqs} />
           </div>
           <div id="investors">
-            <ComponentWrapper heading="Key Investors">
+            <ComponentWrapper heading=" Team">
               <KeyInvestors />
             </ComponentWrapper>
           </div>

@@ -1,12 +1,44 @@
 "use client";
 
-const DATA = [
-  { period: "9MFY26A", revenue: 350,  ebitda: 7,   growth: "100%", margin: 2  },
-  { period: "FY26E",   revenue: 480,  ebitda: 12,  growth: "81%",  margin: 3  },
-  { period: "FY27E",   revenue: 750,  ebitda: 41,  growth: "56%",  margin: 6  },
-  { period: "FY28E",   revenue: 1050, ebitda: 99,  growth: "40%",  margin: 9  },
-  { period: "FY29E",   revenue: 1300, ebitda: 162, growth: "24%",  margin: 12 },
-];
+// Parses a numeric value out of a financial cell ("1,050" -> 1050, "12%" -> 12).
+function num(value) {
+  const parsed = parseFloat(String(value ?? "").replace(/[^0-9.-]/g, ""));
+  return Number.isFinite(parsed) ? parsed : 0;
+}
+
+// Rounds up to a "nice" axis maximum (e.g. 1300 -> 2000, 12 -> 20).
+function niceMax(value) {
+  if (value <= 0) return 1;
+  const pow = Math.pow(10, Math.floor(Math.log10(value)));
+  const n = value / pow;
+  const nice = n <= 1 ? 1 : n <= 2 ? 2 : n <= 5 ? 5 : 10;
+  return nice * pow;
+}
+
+// Builds chart rows from the financial table (columns + rows) returned by the API.
+function buildChartData(columns, rows) {
+  const cols = Array.isArray(columns) ? columns : [];
+  const tableRows = Array.isArray(rows) ? rows : [];
+  if (cols.length === 0 || tableRows.length === 0) return [];
+
+  const rowByParticular = (needle) =>
+    tableRows.find((r) => (r?.particular || "").toLowerCase().includes(needle));
+
+  const revenueRow = rowByParticular("revenue (");
+  const ebitdaRow = rowByParticular("ebitda (");
+  const growthRow = rowByParticular("growth");
+  const marginRow = rowByParticular("margin");
+
+  const at = (row, i) => row?.values?.[i]?.value;
+
+  return cols.map(({ label }, i) => ({
+    period: label,
+    revenue: num(at(revenueRow, i)),
+    ebitda: num(at(ebitdaRow, i)),
+    growth: at(growthRow, i) ?? "",
+    margin: num(at(marginRow, i)),
+  }));
+}
 
 // Layout constants
 const W = 680, H = 340;
@@ -14,25 +46,29 @@ const LX = 64, RX = W - 50, TY = 30, BY = H - 56;
 const CW = RX - LX;   // chart width
 const CH = BY - TY;   // chart height
 
-const MAX_REV = 1400;
-const MAX_MGN = 15;
-
-const SLOTS = DATA.length;
-const slotW = CW / SLOTS;
 const BAR_W = 46;
 const EBITDA_W = 22;
 
-function cx(i) { return LX + slotW * i + slotW / 2; }
-function revY(v) { return BY - (v / MAX_REV) * CH; }
-function revH(v) { return (v / MAX_REV) * CH; }
-function mgnY(v) { return BY - (v / MAX_MGN) * CH; }
+export default function FinancialChart({ columns, rows }) {
+  const DATA = buildChartData(columns, rows);
+  if (DATA.length === 0) return null;
 
-const REV_GRID = [0, 350, 700, 1050, 1400];
-const MGN_GRID = [0, 5, 10, 15];
+  const MAX_REV = niceMax(Math.max(...DATA.map((d) => Math.max(d.revenue, d.ebitda)), 0));
+  const MAX_MGN = niceMax(Math.max(...DATA.map((d) => d.margin), 0));
 
-const linePoints = DATA.map((d, i) => `${cx(i)},${mgnY(d.margin)}`).join(" ");
+  const SLOTS = DATA.length;
+  const slotW = CW / SLOTS;
 
-export default function FinancialChart() {
+  const cx = (i) => LX + slotW * i + slotW / 2;
+  const revY = (v) => BY - (v / MAX_REV) * CH;
+  const revH = (v) => (v / MAX_REV) * CH;
+  const mgnY = (v) => BY - (v / MAX_MGN) * CH;
+
+  const REV_GRID = [0, 0.25, 0.5, 0.75, 1].map((f) => Math.round(MAX_REV * f));
+  const MGN_GRID = [0, 0.25, 0.5, 0.75, 1].map((f) => Math.round(MAX_MGN * f));
+
+  const linePoints = DATA.map((d, i) => `${cx(i)},${mgnY(d.margin)}`).join(" ");
+
   return (
     <section className="section-card">
       <div className="flex flex-col gap-4">
