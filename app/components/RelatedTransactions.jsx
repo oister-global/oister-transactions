@@ -73,7 +73,7 @@ export default function RelatedTransactions({ currentId }) {
     const all = data?.data ?? [];
     const others = all.filter((t) => t._id !== currentId);
     const shuffled = [...others].sort(() => Math.random() - 0.5);
-    return shuffled.slice(0, 4);
+    return shuffled.slice(0, 3);
   }, [data, currentId]);
 
   if (isLoading || related.length === 0) return null;

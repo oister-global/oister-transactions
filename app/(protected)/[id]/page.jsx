@@ -70,6 +70,8 @@ export default function Page() {
     shareholdingAndLastRound,
     valuationContent,
     valuationDisclaimer,
+    keyManagementTeam,
+    keyInvestors,
     faqs,
     disclaimer,
     deckLink,
@@ -78,7 +80,6 @@ export default function Page() {
     isInterested,
   } = data || {};
 
-  console.log("===", data)
 
   return (
     <div className="flex flex-col gap-0">
@@ -151,7 +152,7 @@ export default function Page() {
             <ValuationSection content={valuationContent} disclaimer={valuationDisclaimer} />
           </div>
           <div id="leadership">
-            <LeadershipTeam />
+            <LeadershipTeam team={keyManagementTeam} />
           </div>
           <div id="cap-table">
             <CapTable />
@@ -165,11 +166,13 @@ export default function Page() {
           <div id="faqs">
             <FAQs faqs={faqs} />
           </div>
-          <div id="investors">
-            <ComponentWrapper heading=" Team">
-              <KeyInvestors />
-            </ComponentWrapper>
-          </div>
+          {Array.isArray(keyInvestors) && keyInvestors.length > 0 && (
+            <div id="investors">
+              <ComponentWrapper heading="Key Investors">
+                <KeyInvestors investors={keyInvestors} />
+              </ComponentWrapper>
+            </div>
+          )}
           <div id="related">
             <RelatedTransactions currentId={id} />
           </div>

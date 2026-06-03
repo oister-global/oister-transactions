@@ -53,7 +53,7 @@ export default function FinancialProjections({ columns, rows, bullets }) {
           <ul className="flex flex-col gap-3">
             {bulletPoints.map((point, idx) => (
               <li key={idx} className="flex gap-2.5">
-                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#28283B]" />
+                <span className="mt-[9px] h-1.5 w-1.5 shrink-0 rounded-full bg-[#28283B] sm:mt-[10px]" />
                 <p
                   className="text-sm leading-relaxed text-[#696C7A] sm:text-base"
                   dangerouslySetInnerHTML={{ __html: point }}

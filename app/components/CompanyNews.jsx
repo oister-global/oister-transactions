@@ -22,7 +22,7 @@ function NewsItem({ article, companyName }) {
   const { title, url, source, publishedAt } = article;
   return (
     <li className="flex gap-3 py-4 border-b border-[#e8eaef] last:border-b-0">
-      <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[#555573]" />
+      <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-[#555573] sm:mt-2" />
       <div className="flex flex-col gap-1.5">
         <a
           href={url}

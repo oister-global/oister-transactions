@@ -35,7 +35,7 @@ export default function BusinessSegments({ SEGMENTS, disclaimer }) {
               <ul className="flex-1 flex flex-col gap-2">
                 {htmlListToHtmlArray(description).map((point, idx) => (
                   <li key={idx} className="flex items-start gap-2">
-                    <span className="mt-[7px] size-1.5 shrink-0 rounded-full bg-[#555573]" />
+                    <span className="mt-2 size-1.5 shrink-0 rounded-full bg-[#555573]" />
                     <span
                       className="text-sm leading-relaxed text-[#696C7A]"
                       dangerouslySetInnerHTML={{ __html: point }}

@@ -15,7 +15,7 @@ export default function InvestmentThesis({ thesis }) {
               <ul className="flex flex-col gap-2">
                 {htmlListToHtmlArray(bullets).map((point, i) => (
                   <li key={i} className="flex items-start gap-2">
-                    <span className="mt-[6px] size-1.5 shrink-0 rounded-full bg-[#555573]" />
+                    <span className="mt-[9px] size-1.5 shrink-0 rounded-full bg-[#555573] sm:mt-[10px]" />
                     <span
                       className="text-sm leading-relaxed text-[#696C7A] sm:text-base"
                       dangerouslySetInnerHTML={{ __html: point }}
