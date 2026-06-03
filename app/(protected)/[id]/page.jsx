@@ -71,6 +71,7 @@ export default function Page() {
     valuationContent,
     valuationDisclaimer,
     keyManagementTeam,
+    seniorLeadershipTeam,
     keyInvestors,
     faqs,
     disclaimer,
@@ -152,7 +153,7 @@ export default function Page() {
             <ValuationSection content={valuationContent} disclaimer={valuationDisclaimer} />
           </div>
           <div id="leadership">
-            <LeadershipTeam team={keyManagementTeam} />
+            <LeadershipTeam team={keyManagementTeam} seniorLeadership={seniorLeadershipTeam} />
           </div>
           <div id="cap-table">
             <CapTable />

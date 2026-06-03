@@ -49,9 +49,9 @@ export default function Page() {
             instrumentType,
             pricePerShare,
             isInterested,
-          }) => (
+          }, index1) => (
             <TransactionCard
-              key={index}
+              key={index1}
               id={_id}
               index={index}
               heading={heading}

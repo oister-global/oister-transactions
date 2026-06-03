@@ -36,12 +36,12 @@ useShowInterestMutation()
 | 5 | Key Highlights | `KeyHighlights` | `KEY_HIGHLIGHTS` (hardcoded) + `bulletPoints` (API) |
 | 6 | Financial Projections | `Financial` | hardcoded |
 | 7 | Shareholding & Last Round | `ShareholdingSection` | hardcoded |
-| 8 | Key Management Team | `LeadershipTeam` | hardcoded |
+| 8 | Key Management Team | `LeadershipTeam` | `keyManagementTeam`, `seniorLeadershipTeam` (API) |
 | 9 | Cap Table | `CapTable` | hardcoded |
 | 10 | Company News | `CompanyNews` | `/api/news?q=companyName` (NewsAPI proxy — companyName hardcoded) |
 | 11 | Video | `VideoComponent` | `videoLink` (API) |
 | 12 | FAQs | `FAQs` | hardcoded |
-| 13 | Key Investors | `KeyInvestors` (inside `ComponentWrapper`) | hardcoded (placeholder cards) |
+| 13 | Key Investors | `KeyInvestors` (inside `ComponentWrapper`) | `keyInvestors` (API) |
 | 14 | Related Transactions | `RelatedTransactions` | `useGetTransactionsQuery()` — random 4, excludes current |
 | 15 | Disclaimer | `ComponentWrapper` | `disclaimer` (API) |
 | 16 | Success Modal | `Modal` | triggered by showInterest mutation |
@@ -75,9 +75,12 @@ Props: `listData` (array of `{ title, subtitle }`), `bulletListData` (array of s
 - **Pending:** connect to CMS/API
 
 ### `LeadershipTeam`
-- No props — hardcoded `LEADERSHIP` array
-- Avatar: shows image if provided, else initials on `bg-[#d9e8b5]`
-- **Pending:** connect to CMS/API
+Props: `team` (`keyManagementTeam`), `seniorLeadership` (`seniorLeadershipTeam`)
+
+- `team`: array of `{ name, title, bullets, image? }`. `bullets` is an HTML list string parsed via `htmlListToHtmlArray` (rendered with `dangerouslySetInnerHTML` to preserve inline tags)
+- Avatar: shows `image` if provided, else initials on `bg-[#d9e8b5]`
+- `seniorLeadership`: HTML list string parsed via `htmlListToHtmlArray`, rendered as a bulleted "Senior Leadership Team" block below the team
+- Renders `null` only when both `team` and `seniorLeadership` are empty; each block renders independently
 
 ### `CapTable`
 - No props — hardcoded `GROUPS` array with grouped rows (parent + member rows)
@@ -108,9 +111,12 @@ Props: `videoLink` (string — iframe-compatible URL)
 - **Pending:** connect to CMS/API
 
 ### `KeyInvestors`
-- No props — hardcoded placeholder colored squares (6 items)
+Props: `investors` (`keyInvestors`)
+
+- `investors`: array of `{ name, logo }`. Renders `logo` via `next/image` (`object-contain` on a white card), falling back to the `name` text when no logo
 - Uses Framer Motion `whileHover` scale on each card
-- **Pending:** replace placeholder cards with actual investor logos from CMS
+- Renders `null` when empty; `page.jsx` also guards the surrounding `ComponentWrapper` so the heading is hidden when there are no investors
+- Logo URLs are expected from the allowlisted S3 hosts in `next.config` (`oistercdn.s3…`, `oister-transactions.s3…`)
 
 ### `RelatedTransactions`
 Props: `currentId` (string)
@@ -147,6 +153,9 @@ Props: `show`, `title`, `description`, `buttonText`
 | `videoLink` | HTML string | `VideoComponent` (via `trimHTML`) |
 | `index` | number | Hero background image selector |
 | `isInterested` | boolean | Hides "I'm Interested" button |
+| `keyManagementTeam` | array of `{ name, title, bullets, image? }` | `LeadershipTeam` (`bullets` is an HTML list string) |
+| `seniorLeadershipTeam` | HTML list string | `LeadershipTeam` Senior Leadership block (via `htmlListToHtmlArray`) |
+| `keyInvestors` | array of `{ name, logo }` | `KeyInvestors` |
 
 ---
 
@@ -155,12 +164,13 @@ Props: `show`, `title`, `description`, `buttonText`
 | Item | Status |
 |---|---|
 | `KEY_HIGHLIGHTS` hardcoded in `page.jsx` | Needs CMS field |
-| `LeadershipTeam` fully hardcoded | Needs CMS field |
+| `LeadershipTeam` | ✅ API-driven (`keyManagementTeam` + `seniorLeadershipTeam`) |
 | `Financial` fully hardcoded | Needs CMS field |
 | `ShareholdingSection` fully hardcoded | Needs CMS field |
 | `CapTable` fully hardcoded | Needs CMS field |
 | `FAQs` fully hardcoded | Needs CMS field |
-| `KeyInvestors` placeholder squares | Needs investor logos from CMS |
+| `KeyInvestors` | ✅ API-driven (`keyInvestors` — logo + name fallback) |
 | `CompanyNews` — `companyName` hardcoded | Should come from API |
 | `VideoComponent` — no guard on empty `videoLink` | Should hide section if no link |
 | `Modal` has no dismiss/close action | Intentional or pending? |
+| `seniorLeadershipTeam` | ✅ Full HTML rendered (paragraphs + lists) via `dangerouslySetInnerHTML` with arbitrary-variant list styling |
