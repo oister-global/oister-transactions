@@ -26,13 +26,13 @@ app/
     StoreProvider.jsx
     services/
       baseApi.js                    # RTK Query base with custom fetch
-      authApi.js                    # Login endpoint
+      authApi.js                    # OTP send/verify endpoints
       transactionsApi.js            # Transactions + show interest endpoints
       buildCustomFetchBaseQuery.js  # Attaches auth token to every request
 public/                  # Static assets
 ```
 
-**Auth:** Token stored in `localStorage` via `app/lib/auth.js`. `AuthGuard.jsx` protects client routes. Token is injected into API calls by `buildCustomFetchBaseQuery.js`.
+**Auth:** OTP-based (not password). `EmailInputAndButton` sends an OTP (`useSendOtpMutation`); `LoginAuthPanel` verifies it (`useVerifyOtpMutation`). The session token arrives in the **`x-auth-token` response header** and is persisted to `localStorage` via `setUserSession`. `AuthGuard.jsx` protects client routes; `buildCustomFetchBaseQuery.js` injects the token as `Authorization: Bearer <token>` and redirects to `/login` on a `401`.
 
 **API base URL:** `https://api-dev.oisterglobal.com`
 
@@ -44,9 +44,11 @@ public/                  # Static assets
 
 - JSX only
 - Tailwind CSS for all styling — no inline styles, no CSS modules
-- Keep components small and single-purpose
+- IMPORTANT: Keep components small and single-purpose
+- IMPORTANT: All components should follow the same structure, like first all imports line, then module-level constants/static data, then helper functions and sub-components, and the default-exported main component last (with the `"use client"` directive at the very top only when needed)
 - Shared/reusable components go in `app/components/`; page-specific components go in a `components/` folder co-located with the page
-- Use RTK Query hooks (`useGetTransactionsQuery`, `useShowInterestMutation`, etc.) for all data fetching — no raw `fetch` in components
+- Use RTK Query hooks (`useGetTransactionsQuery`, `useGetTransactionQuery`, `useShowInterestMutation`, `useSendOtpMutation`, `useVerifyOtpMutation`) for all data fetching — no raw `fetch` in components (the lone exception is `CompanyNews` calling the internal `/api/news` route)
+- API fields are often HTML strings — render them via the `app/lib/htmlConversion.js` helpers (`trimHTML`, `htmlListToArray`, `htmlListToHtmlArray`), not ad-hoc string parsing
 - Auth helpers must go through `app/lib/auth.js` — never access `localStorage` directly in components
 
 ---
@@ -58,10 +60,9 @@ public/                  # Static assets
 | Framework | Next.js 16 (App Router) |
 | Styling | Tailwind CSS v4 |
 | State / Data fetching | Redux Toolkit + RTK Query |
-| Animations | Framer Motion |
 | Toasts | react-hot-toast |
 
-**Do not introduce:** axios, SWR, React Query, CSS-in-JS, additional UI component libraries (ShadCN, MUI, etc.) without discussion.
+**Do not introduce:** installing any other libraries without discussion.
 
 ---
 
@@ -84,15 +85,17 @@ npm start
 npm run lint
 ```
 
+**Environment:** `NEWSAPI_KEY` (in `.env.local`) is required by `app/api/news/route.js` for the Company News section; without it the section shows a graceful "unavailable" message.
+
 ---
 
 ## Critical Rules
 
-- Never access `localStorage` directly in components — use `app/lib/auth.js` helpers (`getUserToken`, `setUserSession`, `clearUserSession`)
+- Never access `localStorage` directly in components — use `app/lib/auth.js` helpers (`getUserToken`, `getUserData`, `setUserSession`, `clearUserSession`, `subscribeAuth`)
+- Add new remote image hosts to `next.config` `remotePatterns`, or `next/image` will refuse to render them
 - Never hardcode API URLs — always use the `baseApi` base URL
 - Do not modify `buildCustomFetchBaseQuery.js` without understanding token injection logic
 - The `(auth)` and `(protected)` route groups are Next.js route groups — parentheses are intentional and must not be removed
-- `app/api/` routes are Next.js server-side API routes — keep them thin (proxy only, no business logic)
 
 ---
 
@@ -100,7 +103,7 @@ npm run lint
 
 | Feature | Route | Status |
 |---|---|---|
-| Login | `/login` | Done |
+| Login (OTP) | `/login` | Done |
 | Transaction listing | `/` | Done |
 | Transaction details | `/[id]` | Done |
 | Show Interest modal | `/[id]` | Done |

@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 // CMS logo URLs come from arbitrary hosts, so use a plain <img> (not next/image,
 // which would require every host in next.config remotePatterns). Field name varies.
 function getLogo(investor) {
+  if (!investor || typeof investor !== "object") return "";
   return investor.logo || investor.image || investor.logoUrl || investor.url || investor.icon || "";
 }
 
@@ -32,7 +33,9 @@ function InvestorCard({ name, logo }) {
 }
 
 export default function KeyInvestors({ investors }) {
-  const items = Array.isArray(investors) ? investors : [];
+  const items = (Array.isArray(investors) ? investors : []).filter(
+    (investor) => investor && typeof investor === "object" && (investor.name || getLogo(investor))
+  );
   if (items.length === 0) return null;
 
   return (

@@ -8,7 +8,7 @@ export default function Error({ reset }) {
   const router = useRouter();
 
   return (
-    <div className="flex h-screen items-center justify-center bg-white">
+    <div className="fixed inset-x-0 bottom-0 top-20 z-40 flex items-center justify-center bg-white px-4">
       <div className="mx-auto flex w-full max-w-md flex-col items-center text-center">
         <FloatingStatusImage alt="Error Page" />
         <h1 className="text-4xl mt-4 mb-2 font-extrabold text-black sm:text-5xl">

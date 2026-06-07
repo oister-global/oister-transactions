@@ -1,0 +1,5 @@
+File to modify   : [path/to/file.tsx]
+What to change   : [describe the change clearly]
+What NOT to touch: [list elements/sections to preserve]
+Styling rules    : [Tailwind only / match existing classes / etc.]
+Edge cases       : [any special behaviour or state to handle]

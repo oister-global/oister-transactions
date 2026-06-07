@@ -89,6 +89,10 @@ export default function FinancialChart({ columns, rows }) {
             <span className="inline-block size-2 rounded-full bg-[#f97316]" />
             EBITDA Margin % — right axis
           </span>
+          <span className="flex items-center gap-1.5">
+            <span className="font-semibold text-[#16a34a]">▲</span>
+            Revenue Growth %
+          </span>
         </div>
 
         <div className="w-full overflow-x-auto">
@@ -142,8 +146,14 @@ export default function FinancialChart({ columns, rows }) {
                     fill="#555573"
                     opacity="0.9"
                   />
-                  {/* Revenue label */}
-                  <text x={x} y={ry - 5} textAnchor="middle" fontSize="10" fontWeight="600" fill="#28283B">
+                  {/* Revenue growth, above the revenue value */}
+                  {d.growth ? (
+                    <text x={x} y={ry - 19} textAnchor="middle" fontSize="10" fontWeight="700" fill="#16a34a">
+                      {`▲ ${d.growth}`}
+                    </text>
+                  ) : null}
+                  {/* Revenue value */}
+                  <text x={x} y={ry - 6} textAnchor="middle" fontSize="11" fontWeight="700" fill="#28283B">
                     {d.revenue.toLocaleString()}
                   </text>
 
@@ -161,11 +171,6 @@ export default function FinancialChart({ columns, rows }) {
                   {/* EBITDA value label */}
                   <text x={x + BAR_W / 2 + 3 + EBITDA_W / 2} y={ey - 4} textAnchor="middle" fontSize="9" fill="#4338ca">
                     {d.ebitda}
-                  </text>
-
-                  {/* Revenue growth label */}
-                  <text x={x - BAR_W / 2 - 2} y={ry + 2} textAnchor="end" fontSize="9" fill="#696C7A">
-                    {d.growth}
                   </text>
 
                   {/* X-axis label */}

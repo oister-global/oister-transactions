@@ -19,6 +19,8 @@ OISTER TRANSACTIONS is a secure B2B transaction discovery platform for Relations
 - **Frontend:** React.js / Next.js, Tailwind CSS
 - **Auth:** JWT
 
+> ℹ️ **As-built:** Next.js 16 (App Router), Tailwind CSS v4, Redux Toolkit + RTK Query for state/data fetching, react-hot-toast for toasts, Framer Motion for micro-interactions. Auth is **OTP-based** (not email+password) with a JWT session token. See [As-Built Implementation](#as-built-implementation-current-state).
+
 ---
 
 ## Pages & User Journey
@@ -29,6 +31,8 @@ OISTER TRANSACTIONS is a secure B2B transaction discovery platform for Relations
 - Success → redirect to Transaction Listing
 - Failure → inline error message
 - All protected routes redirect unauthenticated users to login
+
+> ℹ️ **As-built:** Login is a **two-step OTP flow**, not email+password. Step 1: enter email → OTP is sent (response returns the masked phone the OTP also went to). Step 2: enter the 4-digit OTP → on success a JWT arrives in the `x-auth-token` response header and is persisted to `localStorage`. Branding: split-screen "ACE WITH SECONDARIES" panel. Feedback is via toasts, not inline errors. See [As-Built Implementation](#as-built-implementation-current-state).
 
 ### 2. Transaction Listing Page
 - Card-based layout, CMS/API-driven
@@ -61,6 +65,8 @@ OISTER TRANSACTIONS is a secure B2B transaction discovery platform for Relations
 ---
 
 ## API Contracts
+
+> ℹ️ The contracts below are the **original design**. The shipped contracts (base URL `https://api-dev.oisterglobal.com`, `/manager/*` routes, OTP auth, `PUT` interest) are documented under [As-Built API Contracts](#as-built-api-contracts).
 
 ### Login
 ```
@@ -124,6 +130,75 @@ Success: { success: true, message: "Interest submitted successfully" }
 | Broken PDF/video | Show unavailable message |
 | Duplicate interest submission | Disable CTA |
 | Expired session | Redirect to login |
+
+---
+
+## As-Built Implementation (Current State)
+
+This section documents what actually shipped, where it diverges from the original vision above. For the transaction details page specifically, see [`transaction-details.md`](./transaction-details.md).
+
+### Authentication (OTP, not password)
+
+A two-step OTP flow replaces the email+password design:
+
+1. **Send OTP** — `EmailInputAndButton` collects the email and calls `useSendOtpMutation`. The response includes the (masked) `phone` the OTP was also delivered to, which is shown on the OTP screen.
+2. **Verify OTP** — `LoginAuthPanel` collects the 4-digit OTP (`OTPInput`) and calls `useVerifyOtpMutation`. On success the JWT is read from the **`x-auth-token` response header** (via `transformResponse`) and, together with the user object, persisted through `setUserSession`.
+
+- **Token storage:** `localStorage` keys `user-token` and `user-data`, accessed only via `app/lib/auth.js` (`getUserToken`, `getUserData`, `setUserSession`, `clearUserSession`, `subscribeAuth`). Components never touch `localStorage` directly.
+- **Auth state propagation:** `auth.js` dispatches a custom `oister:auth-change` window event on session changes; components subscribe via `subscribeAuth` + `useSyncExternalStore` (e.g. the listing page reads the RM name this way) so the UI reacts to login/logout without a reload.
+- **Route protection:** `AuthGuard` (wraps the whole app in the root layout) treats `localStorage` as the source of truth — it redirects unauthenticated users on protected routes to `/login`, and authenticated users away from `/login` to `/`.
+- **Token injection:** `buildCustomFetchBaseQuery` attaches `Authorization: Bearer <token>` to every request and, on a `401`, clears the session and redirects to `/login`.
+
+### Routing
+
+App Router with two route groups:
+
+- `(auth)/login` — public login route.
+- `(protected)/` — guarded routes: `/` (listing) and `/[id]` (details), sharing `(protected)/layout.jsx`.
+- `api/news/route.js` — internal Next.js route handler proxying NewsAPI for the Company News section.
+
+The root layout (`app/layout.jsx`) provides the Redux store (`StoreProvider`), a fixed `Header`, `Footer`, `ScrollToTop`, the `AuthGuard`, and a global react-hot-toast `Toaster` (top-center). Font: Work Sans.
+
+### As-Built API Contracts
+
+**Base URL:** `https://api-dev.oisterglobal.com` (never hardcode elsewhere — set once in `baseApi.js`). All data fetching uses RTK Query hooks; no raw `fetch` in components except the internal `/api/news` route.
+
+```
+POST /manager/v1/otp/send          Body: { email }          → { data: { phone, ... } }
+POST /manager/v1/otp/verify        Body: { email, otp }      → { data: {...user} } + x-auth-token header
+GET  /manager/transactions                                   → { data: [ ...transactions ] }
+GET  /manager/transactions/:id                               → { data: { ...transaction } }
+PUT  /manager/transactions/i-am-interested/:id   (no body)   → success → show success modal
+```
+
+- The interest call is a **`PUT` with no body** (the authenticated user + id are sufficient), not a `POST` with `{ transactionId, userId }`.
+- RTK Query `extraOptions` (`showToastOnSuccess` / `showToastOnFailure`) drive automatic toasts in the custom base query; the `Transactions` tag is invalidated on a successful interest submission so listing/detail `isInterested` refreshes.
+
+### Transaction Listing Page (`/`)
+
+- Welcome banner greeting the RM by first name (derived from `user-data`).
+- Responsive card grid (`TransactionCard`), one query via `useGetTransactionsQuery`.
+- **Card fields (from API):** `heading`, `subHeading`, `index` (selects the hero image via `backgroundImage(index)`), `status` + `type` badges, and a 4-cell metrics grid — `valuation`, `minInvestment`, `instrumentType`, `pricePerShare`. A **"Shown Interest"** badge appears when `isInterested` is true. Most fields are HTML strings rendered through `trimHTML`.
+- States: `<Loading />` while fetching; on error the page throws → caught by `app/error.jsx`.
+
+### Transaction Details Page (`/[id]`)
+
+Sections diverge from the original A–M list. As-built sections (in order): Hero image, sticky company header (title + back + CTA), description, Business Segments, then a two-column body (sticky `SideNav` + content) containing Key Highlights, Investment Thesis, Financial table, Financial Chart, Shareholding & Last Round, Valuation, Key Management Team, Cap Table, Company News, Video, FAQs, Key Investors, Related Transactions, and a Disclaimer. Most are API-driven; `CapTable` is still hardcoded and `CompanyNews`/`FAQs` carry a hardcoded "Bombay Shaving" reference. Full breakdown in [`transaction-details.md`](./transaction-details.md).
+
+> Not yet built from the original vision: dedicated **About the Company**, **Market Opportunity (TAM/SAM/SOM)**, **Risk Factors**, **Documents & Data Room**, and **Contact / RM Support** sections, and **LinkedIn/previous-company** links on leadership profiles.
+
+### Show Interest
+
+- Triggered from the sticky CTA (`ButtonsGroup`'s "I'm Interested"); the button is hidden entirely when `isInterested === true` (duplicate prevention).
+- On success a `Modal` confirms submission; its only action navigates back to the dashboard (no dismiss affordance). Failures surface a toast.
+
+### Cross-Cutting Behaviors
+
+- **Error / not-found:** `app/error.jsx` ("OOPS!") with Retry, and `app/not-found.jsx` (404) — both use `FloatingStatusImage` + `ButtonsGroup`. Detail page calls `notFound()` on a fetch error.
+- **Loading:** `app/loading.jsx` full-page spinner, reused by pages during RTK Query loading.
+- **Images:** new remote hosts must be allowlisted in `next.config` `remotePatterns` (e.g. `oistercdn.s3…`, `oister-transactions.s3…`) or `next/image` refuses to render them.
+- **HTML fields:** API fields are frequently HTML strings; render via `app/lib/htmlConversion.js` (`trimHTML`, `htmlListToArray`, `htmlListToHtmlArray`) rather than ad-hoc parsing.
+- **Company News:** requires `NEWSAPI_KEY` in `.env.local`; without it the section degrades to an "unavailable" message.
 
 ---
 

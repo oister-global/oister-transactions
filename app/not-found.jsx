@@ -8,7 +8,7 @@ export default function NotFound() {
   const router = useRouter();
 
   return (
-    <div className="flex h-[calc(100vh-80px)] items-center justify-center bg-white -m-8">
+    <div className="fixed inset-x-0 bottom-0 top-20 z-40 flex items-center justify-center bg-white px-4">
       <div className="mx-auto flex w-full max-w-md flex-col items-center text-center">
         <FloatingStatusImage alt="Page not found" />
         <h1 className="mt-4 text-4xl font-extrabold text-black sm:text-5xl">

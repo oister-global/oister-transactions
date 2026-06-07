@@ -11,7 +11,7 @@ export async function GET(request) {
 
   try {
     const url = `https://newsapi.org/v2/everything?q=${encodeURIComponent(q)}&sortBy=publishedAt&language=en&pageSize=10&apiKey=${apiKey}`;
-    const res = await fetch(url, { next: { revalidate: 3600 } });
+    const res = await fetch(url, { next: { revalidate: 24 * 3600 } });
     const data = await res.json();
     return NextResponse.json(data);
   } catch {

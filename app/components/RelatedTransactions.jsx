@@ -4,7 +4,22 @@ import { trimHTML } from "@/app/lib/htmlConversion";
 import { useGetTransactionsQuery } from "@/app/store/services/transactionsApi";
 import { useMemo, useState } from "react";
 
-function AccordionItem({ _id, heading, subHeading, status, type, valuation, minInvestment, instrumentType }) {
+// Deterministic sample so the related list is stable across re-renders (pure —
+// no Math.random during render). Seeded by the current transaction id.
+function sampleStable(items, count, seed) {
+  let hash = 0;
+  for (let i = 0; i < seed.length; i++) hash = (hash * 31 + seed.charCodeAt(i)) >>> 0;
+  return items
+    .map((item, idx) => {
+      hash = (hash * 1103515245 + 12345) & 0x7fffffff;
+      return { item, rank: hash ^ idx };
+    })
+    .sort((a, b) => a.rank - b.rank)
+    .slice(0, count)
+    .map(({ item }) => item);
+}
+
+function AccordionItem({ _id, heading, subHeading, status, type, valuation, minInvestment, instrumentType, pricePerShare }) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -40,13 +55,14 @@ function AccordionItem({ _id, heading, subHeading, status, type, valuation, minI
           {subHeading && (
             <p className="text-sm leading-relaxed text-[#696C7A]">{trimHTML(subHeading)}</p>
           )}
-          <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+          <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
             {[
               { label: "Status", value: trimHTML(status) },
               { label: "Type", value: trimHTML(type) },
               { label: "Valuation", value: trimHTML(valuation) },
               { label: "Min Investment", value: trimHTML(minInvestment) },
               { label: "Instrument Type", value: trimHTML(instrumentType) },
+              { label: "Price Per Share", value: trimHTML(pricePerShare) },
             ].filter(({ value }) => value).map(({ label, value }) => (
               <div key={label} className="rounded-lg border border-[#e8eaef] bg-[#f6f7f9] p-3">
                 <p className="text-xs font-semibold uppercase tracking-wide text-[#8f949e] mb-1">{label}</p>
@@ -70,10 +86,9 @@ export default function RelatedTransactions({ currentId }) {
   const { data, isLoading } = useGetTransactionsQuery();
 
   const related = useMemo(() => {
-    const all = data?.data ?? [];
-    const others = all.filter((t) => t._id !== currentId);
-    const shuffled = [...others].sort(() => Math.random() - 0.5);
-    return shuffled.slice(0, 3);
+    const all = Array.isArray(data?.data) ? data.data : [];
+    const others = all.filter((t) => t && t._id && t._id !== currentId);
+    return sampleStable(others, 3, String(currentId ?? ""));
   }, [data, currentId]);
 
   if (isLoading || related.length === 0) return null;

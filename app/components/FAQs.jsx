@@ -39,9 +39,11 @@ function FAQItem({ question, answer }) {
   );
 }
 
-export default function FAQs({ faqs }) {
+export default function FAQs({ faqs, companyName }) {
   const items = Array.isArray(faqs) ? faqs : [];
   if (items.length === 0) return null;
+
+  const heading = companyName ? `FAQs ABOUT ${companyName.toUpperCase()}` : "FAQs";
 
   const half = Math.ceil(items.length / 2);
   const leftColumn = items.slice(0, half);
@@ -51,7 +53,7 @@ export default function FAQs({ faqs }) {
     <section className="section-card">
       <div className="flex flex-col gap-6">
         <h2 className="text-xl font-semibold text-[#28283B]">
-          FAQs ABOUT BOMBAY SHAVING
+          {heading}
         </h2>
         {/* Mobile: single column */}
         <div className="divide-y divide-[#e8eaef] sm:hidden">
