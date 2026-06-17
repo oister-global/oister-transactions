@@ -5,10 +5,14 @@ import { getUserData } from "./auth";
 
 function readInitialsFromStorage() {
   const user = getUserData();
-  const fullName = user?.name;
+  // The session JWT carries an `email` but no `name`, so derive the initials
+  // from the email local-part (e.g. "abhinav.kumar" -> "AK").
+  const source =
+    (typeof user?.name === "string" && user.name) ||
+    (typeof user?.email === "string" && user.email.split("@")[0]) ||
+    "";
 
-  if (!fullName || typeof fullName !== "string") return "U";
-  const parts = fullName.trim().split(/\s+/).filter(Boolean);
+  const parts = source.trim().split(/[\s._-]+/).filter(Boolean);
   if (parts.length === 0) return "U";
   if (parts.length === 1) return parts[0].charAt(0).toUpperCase();
   return `${parts[0].charAt(0)}${parts[1].charAt(0)}`.toUpperCase();
