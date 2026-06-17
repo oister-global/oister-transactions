@@ -11,7 +11,7 @@ import { encodeAccessToken } from "../lib/ssoToken";
 // `?tab=` query param, mirroring how this app adopts it in AuthGuard. We land on
 // the authenticated `/home` route directly so its auth guard doesn't bounce to
 // `/login` before the token is adopted.
-const OISTER_EXPERIENCE_URL = process.env.NODE_ENV === "production" ? "https://dashboard.oisterglobal.com/home" : "http://localhost:5173/home";
+const OISTER_EXPERIENCE_URL = process.env.NODE_ENV === "production" ? "https://pre-investment-platform-git-staging-oister.vercel.app/home" : "http://localhost:5173/home";
 
 export default function Logout() {
   const router = useRouter();
