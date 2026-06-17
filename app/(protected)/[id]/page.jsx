@@ -179,7 +179,7 @@ export default function Page() {
       {/* Sticky company header */}
       <div className="sticky top-20 z-20 -mx-3 sm:-mx-8 px-3 sm:px-8 py-2 sm:py-3 flex items-center justify-between gap-2 sm:gap-4" style={{ background: "linear-gradient(90deg, #eef0fb 0%, #e0e7ff 100%)", borderBottom: "1px solid #c7d2fe" }}>
         <div className="flex items-center gap-2 min-w-0">
-          <ChevronIcon onClick={() => router.back()} color="#28283B" />
+          <ChevronIcon onClick={() => router.push("/")} color="#28283B" />
           <h1 className="text-base sm:text-2xl font-bold text-[#28283B] truncate leading-tight">
             {headingText}
           </h1>
