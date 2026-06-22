@@ -23,8 +23,8 @@ export default function TransactionCard({
   ];
 
   return (
-    <a href={`/${id}`} className="card-wrapper">
-      <article className="flex flex-col gap-5">
+    <a href={`/${id}`} className="card-wrapper block h-full">
+      <article className="flex h-full flex-col gap-5">
         <div className="relative w-full xxs:aspect-1928/400 sm:aspect-1928/300 rounded-tl-lg rounded-tr-lg overflow-hidden">
           <Image src={backgroundImage(index)} alt={trimHTML(heading)} fill />
         </div>
@@ -35,7 +35,7 @@ export default function TransactionCard({
           <p className="text-sm text-[#6b707c]">{trimHTML(subHeading)}</p>
         </header>
 
-        <div className="flex justify-between">
+        <div className="mt-auto flex justify-between">
           <div className="flex gap-2">
             <span className="rounded-sm bg-[#138808] px-2 py-1 text-sm text-white">
               {trimHTML(status)}

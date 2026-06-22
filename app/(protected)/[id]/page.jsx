@@ -98,6 +98,11 @@ export default function Page() {
       label: "Key Highlights",
       node: <KeyHighlights listData={highlightCards} bulletListData={highlightBullets} />,
     },
+    hasLeadership && {
+      id: "leadership",
+      label: "Leadership",
+      node: <LeadershipTeam team={keyManagementTeam} seniorLeadership={seniorLeadershipTeam} />,
+    },
     Array.isArray(investmentThesis) && investmentThesis.length > 0 && {
       id: "thesis",
       label: "Investment Thesis",
@@ -122,11 +127,6 @@ export default function Page() {
       id: "valuation",
       label: "Valuation",
       node: <ValuationSection content={valuationContent} disclaimer={valuationDisclaimer} />,
-    },
-    hasLeadership && {
-      id: "leadership",
-      label: "Leadership",
-      node: <LeadershipTeam team={keyManagementTeam} seniorLeadership={seniorLeadershipTeam} />,
     },
     { id: "cap-table", label: "Cap Table", node: <CapTable /> },
     Boolean(companyName) && {
