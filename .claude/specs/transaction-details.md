@@ -71,13 +71,12 @@ Drives both `SideNav` (desktop) and `MobileSectionNav` (mobile). Order:
 | 12 | Valuation | `valuation` | `ValuationSection` | `valuationContent`, `valuationDisclaimer` (API) |
 | 13 | Key Management Team | `leadership` | `LeadershipTeam` | `keyManagementTeam`, `seniorLeadershipTeam` (API) |
 | 14 | Cap Table | `cap-table` | `CapTable` | hardcoded |
-| 15 | Company News | `news` | `CompanyNews` | `/api/news?q=companyName` (NewsAPI proxy — `companyName` hardcoded `"Bombay Shaving"`) |
-| 16 | Video | `video` | `VideoComponent` | `videoLink` (API, via `trimHTML`) |
-| 17 | FAQs | `faqs` | `FAQs` | `faqs` (API) |
-| 18 | Key Investors | `investors` | `KeyInvestors` (inside `ComponentWrapper`) | `keyInvestors` (API) |
-| 19 | Related Transactions | `related` | `RelatedTransactions` | `useGetTransactionsQuery()` — random 4, excludes current |
-| 20 | Disclaimer | — | `ComponentWrapper` | `disclaimer` (API, via `trimHTML`) |
-| 21 | Success Modal | — | `Modal` | triggered by `showInterest` mutation |
+| 15 | Video | `video` | `VideoComponent` | `videoLink` (API, via `trimHTML`) |
+| 16 | FAQs | `faqs` | `FAQs` | `faqs` (API) |
+| 17 | Key Investors | `investors` | `KeyInvestors` (inside `ComponentWrapper`) | `keyInvestors` (API) |
+| 18 | Related Transactions | `related` | `RelatedTransactions` | `useGetTransactionsQuery()` — random 4, excludes current |
+| 19 | Disclaimer | — | `ComponentWrapper` | `disclaimer` (API, via `trimHTML`) |
+| 20 | Success Modal | — | `Modal` | triggered by `showInterest` mutation |
 
 ---
 

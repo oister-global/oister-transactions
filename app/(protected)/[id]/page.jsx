@@ -84,7 +84,6 @@ export default function Page() {
   } = data || {};
 
   const headingText = trimHTML(heading);
-  const companyName = cleanText(heading); // drives Company News + FAQs heading
   const subHeadingText = cleanText(subHeading);
   const deckHref = cleanText(deckLink);
   const videoSrc = cleanText(videoLink);
@@ -150,11 +149,6 @@ export default function Page() {
           rows={capTableRows}
         />
       ),
-    },
-    Boolean(companyName) && {
-      id: "news",
-      label: "Company News",
-      node: <CompanyNews companyName={companyName} />,
     },
     Boolean(videoSrc) && {
       id: "video",

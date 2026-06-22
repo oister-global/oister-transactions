@@ -85,8 +85,6 @@ npm start
 npm run lint
 ```
 
-**Environment:** `NEWSAPI_KEY` (in `.env.local`) is required by `app/api/news/route.js` for the Company News section; without it the section shows a graceful "unavailable" message.
-
 ---
 
 ## Critical Rules

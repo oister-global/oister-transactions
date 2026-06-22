@@ -155,7 +155,6 @@ App Router with two route groups:
 
 - `(auth)/login` — public login route.
 - `(protected)/` — guarded routes: `/` (listing) and `/[id]` (details), sharing `(protected)/layout.jsx`.
-- `api/news/route.js` — internal Next.js route handler proxying NewsAPI for the Company News section.
 
 The root layout (`app/layout.jsx`) provides the Redux store (`StoreProvider`), a fixed `Header`, `Footer`, `ScrollToTop`, the `AuthGuard`, and a global react-hot-toast `Toaster` (top-center). Font: Work Sans.
 
@@ -183,7 +182,7 @@ PUT  /manager/transactions/i-am-interested/:id   (no body)   → success → sho
 
 ### Transaction Details Page (`/[id]`)
 
-Sections diverge from the original A–M list. As-built sections (in order): Hero image, sticky company header (title + back + CTA), description, Business Segments, then a two-column body (sticky `SideNav` + content) containing Key Highlights, Investment Thesis, Financial table, Financial Chart, Shareholding & Last Round, Valuation, Key Management Team, Cap Table, Company News, Video, FAQs, Key Investors, Related Transactions, and a Disclaimer. Most are API-driven; `CapTable` is still hardcoded and `CompanyNews`/`FAQs` carry a hardcoded "Bombay Shaving" reference. Full breakdown in [`transaction-details.md`](./transaction-details.md).
+Sections diverge from the original A–M list. As-built sections (in order): Hero image, sticky company header (title + back + CTA), description, Business Segments, then a two-column body (sticky `SideNav` + content) containing Key Highlights, Investment Thesis, Financial table, Financial Chart, Shareholding & Last Round, Valuation, Key Management Team, Cap Table, Video, FAQs, Key Investors, Related Transactions, and a Disclaimer. Most are API-driven; `CapTable` is still hardcoded and `CompanyNews`/`FAQs` carry a hardcoded "Bombay Shaving" reference. Full breakdown in [`transaction-details.md`](./transaction-details.md).
 
 > Not yet built from the original vision: dedicated **About the Company**, **Market Opportunity (TAM/SAM/SOM)**, **Risk Factors**, **Documents & Data Room**, and **Contact / RM Support** sections, and **LinkedIn/previous-company** links on leadership profiles.
 
@@ -198,7 +197,6 @@ Sections diverge from the original A–M list. As-built sections (in order): Her
 - **Loading:** `app/loading.jsx` full-page spinner, reused by pages during RTK Query loading.
 - **Images:** new remote hosts must be allowlisted in `next.config` `remotePatterns` (e.g. `oistercdn.s3…`, `oister-transactions.s3…`) or `next/image` refuses to render them.
 - **HTML fields:** API fields are frequently HTML strings; render via `app/lib/htmlConversion.js` (`trimHTML`, `htmlListToArray`, `htmlListToHtmlArray`) rather than ad-hoc parsing.
-- **Company News:** requires `NEWSAPI_KEY` in `.env.local`; without it the section degrades to an "unavailable" message.
 
 ---
 
