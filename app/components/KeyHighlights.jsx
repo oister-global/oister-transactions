@@ -1,6 +1,7 @@
 import { StarIcon } from "@/public/svg";
+import SectionDisclaimer from "./SectionDisclaimer";
 
-export default function KeyHighlights({ listData = [], bulletListData = [] }) {
+export default function KeyHighlights({ listData = [], bulletListData = [], disclaimer }) {
     const cards = (Array.isArray(listData) ? listData : []).filter(
         (item) => item && (item.title || item.value)
     );
@@ -48,6 +49,7 @@ export default function KeyHighlights({ listData = [], bulletListData = [] }) {
                         ))}
                     </ul>
                 )}
+                <SectionDisclaimer text={disclaimer} />
             </div>
         </section>
     );

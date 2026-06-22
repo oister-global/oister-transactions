@@ -54,17 +54,28 @@ export default function Page() {
     businessSegmentsDisclaimer,
     keyHighlights,
     keyHighlightsBullets,
+    keyHighlightsDisclaimer,
     investmentThesis,
+    investmentThesisDisclaimer,
     financialColumns,
     financialRows,
     financialBullets,
+    financialDisclaimer,
     shareholdingAndLastRound,
+    shareholdingAndLastRoundDisclaimer,
     valuationContent,
     valuationDisclaimer,
     keyManagementTeam,
     seniorLeadershipTeam,
+    keyManagementTeamDisclaimer,
+    capTableHeading,
+    capTableDescription,
+    capTableDisclaimer,
+    capTableRows,
     keyInvestors,
+    keyInvestorsDisclaimer,
     faqs,
+    faqsDisclaimer,
     disclaimer,
     deckLink,
     videoLink,
@@ -96,24 +107,24 @@ export default function Page() {
     (highlightCards.length > 0 || highlightBullets.length > 0) && {
       id: "highlights",
       label: "Key Highlights",
-      node: <KeyHighlights listData={highlightCards} bulletListData={highlightBullets} />,
+      node: <KeyHighlights listData={highlightCards} bulletListData={highlightBullets} disclaimer={keyHighlightsDisclaimer} />,
     },
     hasLeadership && {
       id: "leadership",
       label: "Leadership",
-      node: <LeadershipTeam team={keyManagementTeam} seniorLeadership={seniorLeadershipTeam} />,
+      node: <LeadershipTeam team={keyManagementTeam} seniorLeadership={seniorLeadershipTeam} disclaimer={keyManagementTeamDisclaimer} />,
     },
     Array.isArray(investmentThesis) && investmentThesis.length > 0 && {
       id: "thesis",
       label: "Investment Thesis",
-      node: <InvestmentThesis thesis={investmentThesis} />,
+      node: <InvestmentThesis thesis={investmentThesis} disclaimer={investmentThesisDisclaimer} />,
     },
     financialRowsArr.length > 0 && {
       id: "financial",
       label: "Financial",
       node: (
         <div className="flex flex-col gap-5">
-          <FinancialProjections columns={financialColumns} rows={financialRowsArr} bullets={financialBullets} />
+          <FinancialProjections columns={financialColumns} rows={financialRowsArr} bullets={financialBullets} disclaimer={financialDisclaimer} />
           <FinancialChart columns={financialColumns} rows={financialRowsArr} />
         </div>
       ),
@@ -121,14 +132,25 @@ export default function Page() {
     htmlListToHtmlArray(shareholdingAndLastRound).length > 0 && {
       id: "shareholding",
       label: "Shareholding",
-      node: <ShareholdingSection content={shareholdingAndLastRound} />,
+      node: <ShareholdingSection content={shareholdingAndLastRound} disclaimer={shareholdingAndLastRoundDisclaimer} />,
     },
     Boolean(valuationContent) && {
       id: "valuation",
       label: "Valuation",
       node: <ValuationSection content={valuationContent} disclaimer={valuationDisclaimer} />,
     },
-    { id: "cap-table", label: "Cap Table", node: <CapTable /> },
+    Array.isArray(capTableRows) && capTableRows.length > 0 && {
+      id: "cap-table",
+      label: "Cap Table",
+      node: (
+        <CapTable
+          heading={capTableHeading}
+          description={capTableDescription}
+          disclaimer={capTableDisclaimer}
+          rows={capTableRows}
+        />
+      ),
+    },
     Boolean(companyName) && {
       id: "news",
       label: "Company News",
@@ -142,14 +164,14 @@ export default function Page() {
     Array.isArray(faqs) && faqs.length > 0 && {
       id: "faqs",
       label: "FAQs",
-      node: <FAQs faqs={faqs} companyName={companyName} />,
+      node: <FAQs faqs={faqs} companyName={companyName} disclaimer={faqsDisclaimer} />,
     },
     Array.isArray(keyInvestors) && keyInvestors.length > 0 && {
       id: "investors",
       label: "Key Investors",
       node: (
         <ComponentWrapper heading="Key Investors">
-          <KeyInvestors investors={keyInvestors} />
+          <KeyInvestors investors={keyInvestors} disclaimer={keyInvestorsDisclaimer} />
         </ComponentWrapper>
       ),
     },

@@ -1,6 +1,7 @@
 import { htmlListToHtmlArray } from "@/app/lib/htmlConversion";
+import SectionDisclaimer from "./SectionDisclaimer";
 
-export default function FinancialProjections({ columns, rows, bullets }) {
+export default function FinancialProjections({ columns, rows, bullets, disclaimer }) {
   const cols = Array.isArray(columns) ? columns : [];
   const tableRows = Array.isArray(rows) ? rows : [];
   if (tableRows.length === 0) return null;
@@ -62,6 +63,7 @@ export default function FinancialProjections({ columns, rows, bullets }) {
             ))}
           </ul>
         )}
+        <SectionDisclaimer text={disclaimer} />
       </div>
     </section>
   );

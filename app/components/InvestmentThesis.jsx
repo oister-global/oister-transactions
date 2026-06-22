@@ -1,6 +1,7 @@
 import { htmlListToHtmlArray } from "@/app/lib/htmlConversion";
+import SectionDisclaimer from "./SectionDisclaimer";
 
-export default function InvestmentThesis({ thesis }) {
+export default function InvestmentThesis({ thesis, disclaimer }) {
   const items = Array.isArray(thesis) ? thesis : [];
   if (items.length === 0) return null;
 
@@ -26,6 +27,7 @@ export default function InvestmentThesis({ thesis }) {
             </div>
           ))}
         </div>
+        <SectionDisclaimer text={disclaimer} />
       </div>
     </section>
   );

@@ -1,6 +1,7 @@
 import { htmlListToHtmlArray } from "@/app/lib/htmlConversion";
+import SectionDisclaimer from "./SectionDisclaimer";
 
-export default function ShareholdingSection({ content }) {
+export default function ShareholdingSection({ content, disclaimer }) {
   const points = htmlListToHtmlArray(content);
   if (points.length === 0) return null;
 
@@ -19,6 +20,7 @@ export default function ShareholdingSection({ content }) {
             </li>
           ))}
         </ul>
+        <SectionDisclaimer text={disclaimer} />
       </div>
     </section>
   );

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import SectionDisclaimer from "./SectionDisclaimer";
 
 // CMS logo URLs come from arbitrary hosts, so use a plain <img> (not next/image,
 // which would require every host in next.config remotePatterns). Field name varies.
@@ -32,14 +33,14 @@ function InvestorCard({ name, logo }) {
   );
 }
 
-export default function KeyInvestors({ investors }) {
+export default function KeyInvestors({ investors, disclaimer }) {
   const items = (Array.isArray(investors) ? investors : []).filter(
     (investor) => investor && typeof investor === "object" && (investor.name || getLogo(investor))
   );
   if (items.length === 0) return null;
 
   return (
-    <section>
+    <section className="flex flex-col gap-4">
       <div className="grid grid-cols-3 gap-3 sm:flex sm:flex-wrap sm:gap-4">
         {items.map((investor, idx) => (
           <InvestorCard
@@ -49,6 +50,7 @@ export default function KeyInvestors({ investors }) {
           />
         ))}
       </div>
+      <SectionDisclaimer text={disclaimer} />
     </section>
   );
 }

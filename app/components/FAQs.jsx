@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import SectionDisclaimer from "./SectionDisclaimer";
 
 function FAQItem({ question, answer }) {
   const [open, setOpen] = useState(false);
@@ -39,7 +40,7 @@ function FAQItem({ question, answer }) {
   );
 }
 
-export default function FAQs({ faqs, companyName }) {
+export default function FAQs({ faqs, companyName, disclaimer }) {
   const items = Array.isArray(faqs) ? faqs : [];
   if (items.length === 0) return null;
 
@@ -74,6 +75,7 @@ export default function FAQs({ faqs, companyName }) {
             ))}
           </div>
         </div>
+        <SectionDisclaimer text={disclaimer} />
       </div>
     </section>
   );

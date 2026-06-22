@@ -1,4 +1,5 @@
 import { htmlListToHtmlArray } from "@/app/lib/htmlConversion";
+import SectionDisclaimer from "./SectionDisclaimer";
 
 // API revenue values are inconsistent ("68%" vs "16"); normalize to "N% revenue".
 function formatRevenue(revenue) {
@@ -35,7 +36,7 @@ function normalizeSegments(SEGMENTS) {
   );
 }
 
-export default function BusinessSegments({ SEGMENTS }) {
+export default function BusinessSegments({ SEGMENTS, disclaimer }) {
   const segments = normalizeSegments(SEGMENTS);
   if (segments.length === 0) return null;
 
@@ -67,6 +68,7 @@ export default function BusinessSegments({ SEGMENTS }) {
             );
           })}
         </div>
+        <SectionDisclaimer text={disclaimer} />
       </div>
     </section>
   );

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import SectionDisclaimer from "./SectionDisclaimer";
 
 // Styling for CMS HTML injected via dangerouslySetInnerHTML. Tailwind's base
 // reset strips list bullets/indentation, so restore them with arbitrary variants.
@@ -37,7 +38,7 @@ function LeaderAvatar({ image, name, className = "" }) {
   );
 }
 
-export default function LeadershipTeam({ team, seniorLeadership }) {
+export default function LeadershipTeam({ team, seniorLeadership, disclaimer }) {
   const members = Array.isArray(team) ? team : [];
   const seniorHtml = typeof seniorLeadership === "string" ? seniorLeadership.trim() : "";
   if (members.length === 0 && !seniorHtml) return null;
@@ -98,6 +99,7 @@ export default function LeadershipTeam({ team, seniorLeadership }) {
             />
           </div>
         )}
+        <SectionDisclaimer text={disclaimer} />
       </div>
     </section>
   );
